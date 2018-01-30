@@ -1,0 +1,4 @@
+<div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox<?php echo $option["id"];?>" value="option<?php echo $option["id"];?>">
+                                    <label class="form-check-label" for="inlineCheckbox<?php echo $option["id"];?>"><?php echo $option["option name"];?></label>
+                                </div>
