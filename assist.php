@@ -7,20 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" type="text/css" media="screen" href="./css/assist.css" />
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
     <script src="./js/jquery.min.js"></script>
-    <script src="./js/bootstrap.min.js"></script>
+    <script src="./bootstrap/js/bootstrap.min.js"></script>
 
 </head>
-<body>
-<div class="row">
-    <div class="col-sm-4"></div>
-    <div class="col-sm-4">
-        <div class="jumbotron">
-            I want to center this div with Bootstrap.
+<body>    
+    <div class="h-100 row align-items-center">
+        <div class="col">
+            <div class="container theme-showcase" role="main">
+                <form class="form-group form-inline">
+                    <input type="number" class="form-control" id="number of seats" placeholder="number of seats">
+                    <button type="button" class="btn btn-outline-info">Next</button>
+                </form>
+            </div>
         </div>
     </div>
-    <div class="col-sm-4"></div>
-</div>
 </body>
 </html>
+
+
+

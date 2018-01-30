@@ -1,13 +1,15 @@
 .container {
     position: relative;
-    height: 14rem;
-    border: 1px solid;
+    height: 5em;
   }
   
-  .jumbotron {
+  .form-group {
     position: absolute;
     top: 50%;
     left:50%;
     transform: translate(-50%,-50%);
-    border: 1px dashed rgb(71, 31, 52);
+  }
+
+  html, body{
+      height: 100%;
   }
