@@ -1,1 +1,3 @@
-/*@import url("assist.css");*/
+.modal-lg {
+    max-width: max-content !important;
+}

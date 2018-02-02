@@ -6,7 +6,7 @@
     <title>Sales Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="./css/sales.css" />
+    <link rel="stylesheet" href="./css/sales.css">
     <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="./js/jquery.min.js"></script>
@@ -25,11 +25,32 @@
         <h5><span class="badge badge-info" style="margin-top: 9px;">Rank #10</span></h5>
       </li>      
     </ul>
-    <button type="button" class="btn btn-outline-light">Assist Customer</button>    
+    <button type="button" class="btn btn-outline-light"  data-toggle="modal" data-target="#assistModal" style="margin: 0 1em">Assist Customer</button>
+    <button type="button" class="btn btn-outline-light" onclick="window.location.href='./logout.php'">Logout</button>
   </div>
 </nav>
 
 <body>
+
+<div class="modal fade bd-example-modal-lg" id="assistModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <?php include 'assist.php'; ?>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Order!</button>
+      </div>
+    </div>
+  </div>
+</div>
     
 </body>
 </html>
