@@ -1,5 +1,5 @@
 <div class="col-sm-12" id="cars">	
-<table class="table table-hover">
+<table class="table table-hover" id="carsTable">
   <thead>
     <tr>
       <th>#</th>
@@ -48,7 +48,7 @@
 		<td>
 		<label class="control control--radio"  data-toggle="tooltip" data-placement="top" title="<?php echo $count++; ?>">			
 			<input type="radio" name="radio"/>
-			<div class="control__indicator"></div>
+			<div class="control__indicator" onclick="getValues(<?php echo ($count-1); ?>)"></div>
 	  	</label>
 		</td>
 		<?php

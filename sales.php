@@ -11,10 +11,21 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="./js/jquery.min.js"></script>
     <script src="./bootstrap/js/bootstrap.min.js"></script>
+    <script>
+      var company = "", model = "";
+      function getValues($id) {
+        company = document.getElementById("carsTable").rows[$id].cells[1].innerHTML;
+        model = document.getElementById("carsTable").rows[$id].cells[2].innerHTML;    
+      }
+
+      function order() {
+        window.location.href='./generateBill.php?company='+company+'&model='+model;
+      }
+    </script>
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" style="color: white;">Hello, &lt;Person&gt;<person></a>
+  <a class="navbar-brand" style="color: white;">Hello, &lt;Person&gt;</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -36,17 +47,18 @@
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Cars' List</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <?php include 'assist.php'; ?>
+        <div id='response'></div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Order!</button>
+        <button type="button" class="btn btn-primary" onclick="order()">Order!</button>
       </div>
     </div>
   </div>
