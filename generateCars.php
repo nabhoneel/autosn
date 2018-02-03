@@ -6,7 +6,7 @@
       <th>Company</th>
       <th>Model</th>
       <th>Seats</th>
-      <th>Price</th>
+      <th>Price <span class="badge badge-pill badge-dark" data-toggle="tooltip" data-placement="top" title="Base price + options">i</span></th>
     </tr>
   </thead>
   <tbody>
@@ -42,12 +42,27 @@
 		foreach($options_result as $y){
 			$x[] = $y["option id"];		
 		}
-		if($x == $json_decode) {		
+		if(isValid($x, $json_decode)) {		
 			echo "<tr>";
-			echo "<td>".$count++."</td><td>".$row["company name"]."</td><td>".$row["model name"]."</td>";
+		?>
+		<td>
+		<label class="control control--radio"  data-toggle="tooltip" data-placement="top" title="<?php echo $count++; ?>">			
+			<input type="radio" name="radio"/>
+			<div class="control__indicator"></div>
+	  	</label>
+		</td>
+		<?php
+			echo "<td>".$row["company name"]."</td><td>".$row["model name"]."</td>";
 			echo "<td>".$row["number of seats"]."</td><td>".money_format('&#8377;%!n', $row["cost"])."</td>";
 		}
 	}
+
+	function isValid($x, $y) {
+		for($i=0; $i<count($y); $i++) {
+			if(!in_array($y[$i], $x)) return false;
+		}
+		return true;
+	}	
 	?>
 
 	</tbody>
