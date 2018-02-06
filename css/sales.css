@@ -1,3 +1,5 @@
+@import "master.css";
+
 .modal-lg {
     max-width: max-content !important;
 }

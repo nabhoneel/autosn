@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="./js/jquery.min.js"></script>
 	<script src="./bootstrap/js/bootstrap.min.js"></script>
-	
+
 	<script>
 	function showCars() {
 		var xmlhttp = new XMLHttpRequest();
@@ -27,7 +27,7 @@
 			if(inputElements[i].checked) {
 				checkedValues.push(inputElements[i].value);
 				}
-		}		
+		}
         xmlhttp.open("POST", "generateCars.php", true);
 		xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xmlhttp.send(JSON.stringify(checkedValues));
@@ -43,7 +43,7 @@
                     <input type="number" class="form-control" id="number of seats" placeholder="number of seats" min="1" max="7">
                 </div>
                 <div class="col-sm-9">
-                    <?php                             
+                    <?php
                             include 'connection.php';
                             $rows = $mysqli->query("select `id`, `option name` from `options`;");
 
@@ -53,7 +53,7 @@
                                 <input type="checkbox" value="<?php echo $option["id"];?>" class="options"/>
                                 <div class="control__indicator"></div>
                                 </label>
-                    <?php }                                                        
+                    <?php }
                             ?>
                 </div>
                 <div class="col-sm-1">

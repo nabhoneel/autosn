@@ -13,6 +13,7 @@
     <script src="./bootstrap/js/bootstrap.min.js"></script>
 	<script>
     function generalEventer() {
+        document.getElementById("saveOld").disabled = true;
         var options = document.getElementsByClassName("options");
         for (var i = 0; i < options.length; i++) {
             options[i].addEventListener('change', function() {
@@ -53,6 +54,78 @@
     }
     function getDetails() {
         var str = document.getElementById("emailid").value;
+        if (window.XMLHttpRequest) {
+			// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp=new XMLHttpRequest();
+		} else {  // code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange=function() {
+			if (this.readyState==4 && this.status==200) {
+				document.getElementById("oldFormBody").innerHTML=this.responseText;
+			}
+		}
+		xmlhttp.open("POST", "fetchDetails.php", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send("email=" + str);
+    }
+    function makeEditable(x) {
+        if(x === 1) {
+            document.getElementById("oldname").readOnly = false;
+            document.getElementById("oldaddress").readOnly = false;
+            document.getElementById("oldcontact").readOnly = false;
+            document.getElementById("olddob").readOnly = false;
+            document.getElementById("saveOld").disabled = false;
+        }
+        else {
+            document.getElementById("oldname").readOnly = true;
+            document.getElementById("oldaddress").readOnly = true;
+            document.getElementById("oldcontact").readOnly = true;
+            document.getElementById("olddob").readOnly = true;
+            document.getElementById("saveOld").disabled = true;
+        }
+    }
+    function saveOld() {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("alertSuccess").innerHTML = this.responseText;
+                if(document.getElementById("queryStatus").value=="success") makeEditable(0);
+            }
+        };
+        var details = [];
+        details.push(0);
+        details.push(document.getElementById("emailid").value);
+        details.push(document.getElementById("oldname").value);
+        details.push(document.getElementById("oldaddress").value);
+        details.push(document.getElementById("oldcontact").value);
+        details.push(document.getElementById("olddob").value);
+
+        xmlhttp.open("POST", "save.php", true);
+		xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlhttp.send(JSON.stringify(details));
+    }
+    function saveNew() {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("alertSuccessNew").innerHTML = this.responseText;
+            }
+        };
+        var details = [];
+        details.push(1);
+        details.push(document.getElementById("emailnew").value);
+        details.push(document.getElementById("namenew").value);
+        details.push(document.getElementById("addressnew").value);
+        details.push(document.getElementById("contactnew").value);
+        details.push(document.getElementById("dobnew").value);
+
+        xmlhttp.open("POST", "save.php", true);
+		xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlhttp.send(JSON.stringify(details));
+    }
+    function finishOrder() {
+
     }
     </script>
 </head>
@@ -76,6 +149,9 @@
 <body onload="generalEventer()">
 <div class="grid">
     <div class="userDetails">
+        <h2 style="text-align: center;">
+            Customer Details
+        </h2>
         <ul class="nav nav-tabs nav-fill" id="customers" role="tablist">
           <li class="nav-item">
             <a class="nav-link active" id="old-tab" data-toggle="tab" href="#oldcust" role="tab" aria-controls="old-customer" aria-selected="true">Returning customer</a>
@@ -91,48 +167,80 @@
               <div id="showids"></div>
               <br>
               <center>
-                  <button type="button" id="detailsbutton" disabled class="btn btn-outline-info">Get details</button>
+                  <button type="button" id="detailsbutton" disabled class="btn btn-outline-info" onclick="getDetails()">Get details</button>
               </center>
 
-              <div class="modal-body">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
-                    </div>
-                    <input type="text" readonly id="email" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                </div>
+              <div class="modal-body" id="oldFormBody">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
                     </div>
-                    <input type="text" id="name" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                    <input type="text" id="oldname" readonly class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="inputGroup-sizing-default">Date of Birth</span>
                     </div>
-                    <input type="date" id="dob" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                    <input type="date" id="olddob" readonly class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="inputGroup-sizing-default">Contact</span>
                         <span class="input-group-text" id="inputGroup-sizing-default">(+91)</span>
                     </div>
-                    <input type="text" id="contact" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                    <input type="text" id="oldcontact" readonly class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="inputGroup-sizing-default">Address</span>
                     </div>
-                    <input type="text" id="name" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                    <input type="text" id="oldaddress" readonly class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                 </div>
               </div>
+              <div id="alertSuccess"></div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-outline-info">Edit details</button>
-                <button type="button" class="btn btn-primary">Confirm details</button>
+                <button type="button" class="btn btn-outline-info" onclick="makeEditable(1)">Edit details</button>
+                <button type="button" class="btn btn-outline-info" id="saveOld" onclick="saveOld()">Save</button>
               </div>
           </div>
           <div class="tab-pane fade" id="newcust" role="tabpanel" aria-labelledby="pills-profile-tab">
+              <div class="modal-body">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+                    </div>
+                    <input type="text" id="emailnew" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+                    </div>
+                    <input type="text" id="namenew" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">Date of Birth</span>
+                    </div>
+                    <input type="date" id="dobnew" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">Contact</span>
+                        <span class="input-group-text" id="inputGroup-sizing-default">(+91)</span>
+                    </div>
+                    <input type="text" id="contactnew" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">Address</span>
+                    </div>
+                    <input type="text" id="addressnew" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+              </div>
+              <div id="alertSuccessNew"></div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-info" onclick="saveNew()">Save</button>
+              </div>
           </div>
         </div>
     </div>
@@ -153,12 +261,12 @@
 
         $modelDetails = $modDetails->fetch_array(MYSQLI_NUM);
         ?>
-        <h1 style="text-align: center;">
+        <h2 style="text-align: center;">
             <?php echo $company." ".$model; ?>
-        </h1>
-        <h3 style="text-align: center;">
+        </h2>
+        <h4 style="text-align: center;">
             <?php echo $modelDetails[0]."-seater car"; ?>
-        </h3>
+        </h4>
         <br>
         <table class="table table-sm">
           <thead>
@@ -190,6 +298,26 @@
           </tr>
           </tbody>
         </table>
+        <button style="float: right;" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirmDialog">Confirm Order!</button>
     </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="confirmDialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>After this point, the details cannot be edited. Are you sure you want to proceed?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Proceed!</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 </body>

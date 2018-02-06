@@ -1,4 +1,4 @@
-<div class="col-sm-12" id="cars">	
+<div class="col-sm-12" id="cars">
 <table class="table table-hover" id="carsTable">
   <thead>
     <tr>
@@ -10,12 +10,12 @@
     </tr>
   </thead>
   <tbody>
-		
+
 	<?php
 	include 'connection.php';
 	header('Content-type: application/json');
 	$json = file_get_contents('php://input');
-	$json_decode = json_decode($json, true); 
+	$json_decode = json_decode($json, true);
 
 	//generating an array with the specified options:
 	$options = "";
@@ -29,7 +29,7 @@
 		$json_decode[$i] = $json_decode[$i + 1];
 	}
 	unset($json_decode[count($json_decode) - 1]);
-	
+
 	setlocale(LC_MONETARY, 'en_IN.UTF-8');
 	$count = 1;
 	$results = $mysqli->query($query);
@@ -40,13 +40,13 @@
 
 		$x = array();
 		foreach($options_result as $y){
-			$x[] = $y["option id"];		
+			$x[] = $y["option id"];
 		}
-		if(isValid($x, $json_decode)) {		
+		if(isValid($x, $json_decode)) {
 			echo "<tr>";
 		?>
 		<td>
-		<label class="control control--radio"  data-toggle="tooltip" data-placement="top" title="<?php echo $count++; ?>">			
+		<label class="control control--radio"  data-toggle="tooltip" data-placement="top" title="<?php echo $count++; ?>">
 			<input type="radio" name="radio"/>
 			<div class="control__indicator" onclick="getValues(<?php echo ($count-1); ?>)"></div>
 	  	</label>
@@ -62,7 +62,7 @@
 			if(!in_array($y[$i], $x)) return false;
 		}
 		return true;
-	}	
+	}
 	?>
 
 	</tbody>
