@@ -7,19 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="./css/sales.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/assist.css" />
     <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="./js/jquery.min.js"></script>
     <script src="./bootstrap/js/bootstrap.min.js"></script>
     <script>
-      var company = "", model = "";
-      function getValues($id) {
-        company = document.getElementById("carsTable").rows[$id].cells[1].innerHTML;
-        model = document.getElementById("carsTable").rows[$id].cells[2].innerHTML;    
+      var index;
+      function getValues(id) {
+        index = id;
       }
 
       function order() {
-        window.location.href='./generateBill.php?company='+company+'&model='+model;
+        window.location.href='./generateBill.php?index='+index;
       }
     </script>
 </head>
@@ -34,7 +34,7 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <h5><span class="badge badge-info" style="margin-top: 9px;">Rank #10</span></h5>
-      </li>      
+      </li>
     </ul>
     <button type="button" class="btn btn-outline-light"  data-toggle="modal" data-target="#assistModal" style="margin: 0 1em">Assist Customer</button>
     <button type="button" class="btn btn-outline-light" onclick="window.location.href='./logout.php'">Logout</button>
@@ -43,18 +43,17 @@
 
 <body>
 
-<div class="modal fade bd-example-modal-lg" id="assistModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade " id="assistModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Cars' List</h5>
+        <h5 class="modal-title" id="longTitle">Cars' List</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <?php include 'assist.php'; ?>
-        <div id='response'></div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -63,6 +62,5 @@
     </div>
   </div>
 </div>
-    
 </body>
 </html>

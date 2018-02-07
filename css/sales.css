@@ -1,5 +1,24 @@
 @import "master.css";
 
-.modal-lg {
-    max-width: max-content !important;
+.carsExpand:after {
+    font-family: FontAwesome;
+    content: "\f056";
+    float: right;
+  }
+  /* Icon when the collapsible content is hidden */
+  .carsExpand.collapsed:after {
+    content: "\f055";
+  }
+
+.modal-body {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 0.5em;
+    padding: 0.5em;
+    justify-items: center;
+}
+
+.item4 {
+  grid-column: 1 / 4;
+  width: 100%;
 }

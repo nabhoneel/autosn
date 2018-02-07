@@ -11,61 +11,51 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="./js/jquery.min.js"></script>
     <script src="./bootstrap/js/bootstrap.min.js"></script>
-	<script>
-    function generalEventer() {
-        document.getElementById("saveOld").disabled = true;
-        var options = document.getElementsByClassName("options");
-        for (var i = 0; i < options.length; i++) {
-            options[i].addEventListener('change', function() {
-                if(this.checked == true) document.getElementById("totalCost").innerHTML = parseInt(document.getElementById("totalCost").innerHTML) + parseInt(this.value);
-                if(this.checked == false) document.getElementById("totalCost").innerHTML = parseInt(document.getElementById("totalCost").innerHTML) - parseInt(this.value);
-            });
-        }
-    }
-	function showResult(str) {
-		if (str.length==0) {
-			document.getElementById("showids").innerHTML="";
-			document.getElementById("showids").style.border="0px";
+    <script>
+    function showResult(str) {
+        if (str.length==0) {
+            document.getElementById("showids").innerHTML="";
+            document.getElementById("showids").style.border="0px";
             document.getElementById("detailsbutton").disabled = true;
-			return;
-		}
-		if (window.XMLHttpRequest) {
-			// code for IE7+, Firefox, Chrome, Opera, Safari
-			xmlhttp=new XMLHttpRequest();
-		} else {  // code for IE6, IE5
-			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		xmlhttp.onreadystatechange=function() {
-			if (this.readyState==4 && this.status==200) {
-				document.getElementById("showids").innerHTML=this.responseText;
-				document.getElementById("showids").style.border="1px solid #A5ACB2";
-			}
-		}
+            return;
+        }
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        } else {  // code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function() {
+            if (this.readyState==4 && this.status==200) {
+                document.getElementById("showids").innerHTML=this.responseText;
+                document.getElementById("showids").style.border="1px solid #A5ACB2";
+            }
+        }
         document.getElementById("detailsbutton").disabled = false;
-		xmlhttp.open("GET","accounts.php?q="+str,true);
-		xmlhttp.send();
-	}
+        xmlhttp.open("GET","accounts.php?q="+str,true);
+        xmlhttp.send();
+    }
     function writeToTextArea(str) {
         if(str.length > 0) {
-        document.getElementById("emailid").value = str;
+            document.getElementById("emailid").value = str;
         }
-		document.getElementById("showids").innerHTML="";
-		document.getElementById("showids").style.border="0px";
+        document.getElementById("showids").innerHTML="";
+        document.getElementById("showids").style.border="0px";
     }
     function getDetails() {
         var str = document.getElementById("emailid").value;
         if (window.XMLHttpRequest) {
-			// code for IE7+, Firefox, Chrome, Opera, Safari
-			xmlhttp=new XMLHttpRequest();
-		} else {  // code for IE6, IE5
-			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		xmlhttp.onreadystatechange=function() {
-			if (this.readyState==4 && this.status==200) {
-				document.getElementById("oldFormBody").innerHTML=this.responseText;
-			}
-		}
-		xmlhttp.open("POST", "fetchDetails.php", true);
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        } else {  // code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function() {
+            if (this.readyState==4 && this.status==200) {
+                document.getElementById("oldFormBody").innerHTML=this.responseText;
+            }
+        }
+        xmlhttp.open("POST", "fetchDetails.php", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.send("email=" + str);
     }
@@ -102,7 +92,7 @@
         details.push(document.getElementById("olddob").value);
 
         xmlhttp.open("POST", "save.php", true);
-		xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xmlhttp.send(JSON.stringify(details));
     }
     function saveNew() {
@@ -121,7 +111,7 @@
         details.push(document.getElementById("dobnew").value);
 
         xmlhttp.open("POST", "save.php", true);
-		xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xmlhttp.send(JSON.stringify(details));
     }
     function finishOrder() {
@@ -136,188 +126,187 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-      </li>
-    </ul>
-    <button type="button" class="btn btn-outline-light" onclick="window.history.back()" style="margin: 0 1em">Go back</button>
-    <button type="button" class="btn btn-outline-light" onclick="window.location.href='./logout.php'">Logout</button>
-  </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+            </li>
+        </ul>
+        <button type="button" class="btn btn-outline-light" onclick="window.history.back()" style="margin: 0 1em">Go back</button>
+        <button type="button" class="btn btn-outline-light" onclick="window.location.href='./logout.php'">Logout</button>
+    </div>
 </nav>
 
-<body onload="generalEventer()">
-<div class="grid">
-    <div class="userDetails">
-        <h2 style="text-align: center;">
-            Customer Details
-        </h2>
-        <ul class="nav nav-tabs nav-fill" id="customers" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="old-tab" data-toggle="tab" href="#oldcust" role="tab" aria-controls="old-customer" aria-selected="true">Returning customer</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="new-tab" data-toggle="tab" href="#newcust" role="tab" aria-controls="new-customer" aria-selected="false">New customer</a>
-          </li>
-        </ul>
+<body>
+    <?php
+    $index = $_GET["index"];
 
-        <div class="tab-content">
-          <div class="tab-pane fade show active" id="oldcust" role="tabpanel" aria-labelledby="home-tab">
-              <input size="35" type="text" class="form-control" id="emailid" aria-describedby="emailHelp" placeholder="Enter email" onkeyup="showResult(this.value)">
-              <div id="showids"></div>
-              <br>
-              <center>
-                  <button type="button" id="detailsbutton" disabled class="btn btn-outline-info" onclick="getDetails()">Get details</button>
-              </center>
+    include 'connection.php';
+    $fmt = new NumberFormatter( 'en_IN', NumberFormatter::CURRENCY );
 
-              <div class="modal-body" id="oldFormBody">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+    $optionsQuery = "SELECT `option name`, `cost`, `option id` FROM `car has options` JOIN `cars` JOIN `options` WHERE `option id`=`id` AND `vehicle index`=`index number` AND `index number`=$index ORDER BY `option id`";
+
+    $modelDetailsQuery = "SELECT * FROM `cars` NATURAL JOIN `model` WHERE `index number`=$index";
+
+    $options = $mysqli->query($optionsQuery);
+    $modDetails = $mysqli->query($modelDetailsQuery);
+
+    $modelDetails = $modDetails->fetch_array(MYSQLI_NUM);
+    ?>
+    <center>
+        <h1 style="padding-top: 1em;">
+            <?php echo $modelDetails[0]." ".$modelDetails[1]; ?> [<?php echo $modelDetails[3]; ?>-seater]
+        </h1>
+    </center>
+    <div class="grid">
+        <div class="userDetails">
+            <h2 style="text-align: center;">
+                Customer Details
+            </h2>
+            <ul class="nav nav-tabs nav-fill" id="customers" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="old-tab" data-toggle="tab" href="#oldcust" role="tab" aria-controls="old-customer" aria-selected="true">Returning customer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="new-tab" data-toggle="tab" href="#newcust" role="tab" aria-controls="new-customer" aria-selected="false">New customer</a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="oldcust" role="tabpanel" aria-labelledby="home-tab">
+                    <input size="35" type="text" class="form-control" id="emailid" aria-describedby="emailHelp" placeholder="Enter email" onkeyup="showResult(this.value)">
+                    <div id="showids"></div>
+                    <br>
+                    <center>
+                        <button type="button" id="detailsbutton" disabled class="btn btn-outline-info" onclick="getDetails()">Get details</button>
+                    </center>
+
+                    <div class="modal-body" id="oldFormBody">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+                            </div>
+                            <input type="text" id="oldname" readonly class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Date of Birth</span>
+                            </div>
+                            <input type="date" id="olddob" readonly class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Contact</span>
+                                <span class="input-group-text" id="inputGroup-sizing-default">(+91)</span>
+                            </div>
+                            <input type="text" id="oldcontact" readonly class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Address</span>
+                            </div>
+                            <input type="text" id="oldaddress" readonly class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
                     </div>
-                    <input type="text" id="oldname" readonly class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="inputGroup-sizing-default">Date of Birth</span>
+                    <div id="alertSuccess"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-info" onclick="makeEditable(1)">Edit details</button>
+                        <button type="button" class="btn btn-outline-info" id="saveOld" onclick="saveOld()">Save</button>
                     </div>
-                    <input type="date" id="olddob" readonly class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                 </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="inputGroup-sizing-default">Contact</span>
-                        <span class="input-group-text" id="inputGroup-sizing-default">(+91)</span>
+                <div class="tab-pane fade" id="newcust" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+                            </div>
+                            <input type="text" id="emailnew" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+                            </div>
+                            <input type="text" id="namenew" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Date of Birth</span>
+                            </div>
+                            <input type="date" id="dobnew" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Contact</span>
+                                <span class="input-group-text" id="inputGroup-sizing-default">(+91)</span>
+                            </div>
+                            <input type="text" id="contactnew" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Address</span>
+                            </div>
+                            <input type="text" id="addressnew" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
                     </div>
-                    <input type="text" id="oldcontact" readonly class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="inputGroup-sizing-default">Address</span>
+                    <div id="alertSuccessNew"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-info" onclick="saveNew()">Save</button>
                     </div>
-                    <input type="text" id="oldaddress" readonly class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                 </div>
-              </div>
-              <div id="alertSuccess"></div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline-info" onclick="makeEditable(1)">Edit details</button>
-                <button type="button" class="btn btn-outline-info" id="saveOld" onclick="saveOld()">Save</button>
-              </div>
-          </div>
-          <div class="tab-pane fade" id="newcust" role="tabpanel" aria-labelledby="pills-profile-tab">
-              <div class="modal-body">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
-                    </div>
-                    <input type="text" id="emailnew" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
-                    </div>
-                    <input type="text" id="namenew" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="inputGroup-sizing-default">Date of Birth</span>
-                    </div>
-                    <input type="date" id="dobnew" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="inputGroup-sizing-default">Contact</span>
-                        <span class="input-group-text" id="inputGroup-sizing-default">(+91)</span>
-                    </div>
-                    <input type="text" id="contactnew" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="inputGroup-sizing-default">Address</span>
-                    </div>
-                    <input type="text" id="addressnew" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                </div>
-              </div>
-              <div id="alertSuccessNew"></div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline-info" onclick="saveNew()">Save</button>
-              </div>
-          </div>
+            </div>
+        </div>
+        <div class="cars">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Description</th>
+                        <th>Cost</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td><b>Base Price</b></td>
+                    <td><b><?php echo $fmt->formatCurrency($modelDetails[4], "INR"); ?></b></td>
+                </tr>
+                <?php
+                $optionsCost = 0;
+                foreach($options as $i) {
+                    $optionsCost += $i["cost"];
+                    ?>
+                    <tr>
+                        <td><?php echo $i["option name"]; ?></td>
+                        <td><?php echo $fmt->formatCurrency($i["cost"], "INR"); ?></td>
+                    </tr>
+                    <?php
+                }
+                ?>
+                <thead class="thead-light">
+                    <tr>
+                        <th>Total</th>
+                        <th style="font-family: monospace;
+                        font-size: 1.4em;
+                        text-align: right;"><?php echo $fmt->formatCurrency(($modelDetails[4] + $optionsCost), "INR"); ?></th>
+                    </tr>
+                </thead>
+            </table>
+            <button style="float: right;" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirmDialog">Confirm Order!</button>
         </div>
     </div>
-    <div class="cars">
-        <?php
-        $company = $_GET["company"];
-        $model = $_GET["model"];
-
-        include 'connection.php';
-    	setlocale(LC_MONETARY, 'en_IN.UTF-8');
-
-            $optionsQuery = "SELECT `id`, `option name`, `cost` FROM `options`, `model has options` WHERE `options`.`id` = `model has options`.`option id` AND `model has options`.`company name`='$company' AND `model has options`.`model name`='$model'";
-
-        $modelDetailsQuery = "SELECT `model`.`number of seats`, `model`.`cost` FROM `model` WHERE `model`.`company name`='$company' AND `model`.`model name`='$model'";
-
-        $options = $mysqli->query($optionsQuery);
-        $modDetails = $mysqli->query($modelDetailsQuery);
-
-        $modelDetails = $modDetails->fetch_array(MYSQLI_NUM);
-        ?>
-        <h2 style="text-align: center;">
-            <?php echo $company." ".$model; ?>
-        </h2>
-        <h4 style="text-align: center;">
-            <?php echo $modelDetails[0]."-seater car"; ?>
-        </h4>
-        <br>
-        <table class="table table-sm">
-          <thead>
-            <tr>
-              <th scope="col">Available Options</th>
-              <th scope="col">Cost (&#8377;)</th>
-            </tr>
-          </thead>
-          <tbody>
-        <?php
-        foreach($options as $option) { ?>
-            <tr>
-                <td>
-                    <label class="control control--checkbox"><?php echo $option["option name"];?>
-                    <input type="checkbox" class="options" value="<?php echo $option["cost"]; ?>"/>
-                    <div class="control__indicator"></div>
-                    </label>
-                </td>
-                <td>
-                    <?php echo $option["cost"]; ?>
-                </td>
-            </tr>
-        <?php }
-        echo "<tr><th>Base price</th><td>".$modelDetails[1]."</td></tr>";
-        ?>
-          <tr>
-              <th style="font-size: 1.4em;">Total</th>
-              <td id="totalCost"><?php echo $modelDetails[1]; ?></td>
-          </tr>
-          </tbody>
-        </table>
-        <button style="float: right;" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#confirmDialog">Confirm Order!</button>
+    <div class="modal" tabindex="-1" role="dialog" id="confirmDialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>After this point, the details cannot be edited. Are you sure you want to proceed?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Proceed!</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-<div class="modal" tabindex="-1" role="dialog" id="confirmDialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>After this point, the details cannot be edited. Are you sure you want to proceed?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Proceed!</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
 </body>
