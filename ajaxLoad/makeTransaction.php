@@ -1,7 +1,7 @@
 <?php
 session_start();
 $_SESSION["sales username"] = "nabhoneelm";
-include 'connection.php';
+include '../connection.php';
 $data_array = [];
 foreach ($_POST as $key => $value)
     $data_array[$key] = $value;

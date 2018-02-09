@@ -32,7 +32,7 @@
             }
         }
         document.getElementById("detailsbutton").disabled = false;
-        xmlhttp.open("GET","accounts.php?q="+str,true);
+        xmlhttp.open("GET","ajaxLoad/accounts.php?q="+str,true);
         xmlhttp.send();
     }
     function writeToTextArea(str) {
@@ -55,7 +55,7 @@
                 document.getElementById("oldFormBody").innerHTML=this.responseText;
             }
         }
-        xmlhttp.open("POST", "fetchDetails.php", true);
+        xmlhttp.open("POST", "ajaxLoad/fetchDetails.php", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.send("email=" + str);
     }
@@ -110,7 +110,7 @@
         details.push(document.getElementById("contactnew").value);
         details.push(document.getElementById("dobnew").value);
 
-        xmlhttp.open("POST", "save.php", true);
+        xmlhttp.open("POST", "ajaxLoad/save.php", true);
         xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xmlhttp.send(JSON.stringify(details));
     }
@@ -173,7 +173,7 @@
 
             $.ajax({
                 type: "POST",
-                url: 'makeTransaction.php',
+                url: 'ajaxLoad/makeTransaction.php',
                 data: {
                     email: details[0],
                     name: details[1],

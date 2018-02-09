@@ -118,3 +118,13 @@ namenew
 dobnew
 contactnew
 addressnew
+
+
+
+
+
+
+
+
+
+SELECT SUM(`total price`) AS `amount`, MONTH(`datetime`) AS `month` FROM `sold car` WHERE YEAR(`datetime`)=YEAR(CURDATE()) GROUP BY CONCAT(YEAR(`datetime`), '/', MONTH(`datetime`))

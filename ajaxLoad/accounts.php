@@ -1,6 +1,6 @@
 <?php
 
-include 'connection.php';
+include '../connection.php';
 $email = $_GET["q"];
 $query = "SELECT * FROM `customer`";
 $results = $mysqli->query($query);

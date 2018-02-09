@@ -24,7 +24,7 @@ function showCars() {
             checkedValues.push(inputElements[i].value);
         }
     }
-    xmlhttp.open("POST", "generateCars.php", true);
+    xmlhttp.open("POST", "ajaxLoad/generateCars.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.send(JSON.stringify(checkedValues));
 }
@@ -35,7 +35,6 @@ function showCars() {
 </div>
 <div class="item2">
     <?php
-    include 'connection.php';
     $rows = $mysqli->query("select `id`, `option name` from `options`;");
 
     foreach($rows as $option)

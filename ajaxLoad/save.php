@@ -8,7 +8,7 @@ if($details[0] == 0) editDetails($details);
 else newDetails($details);
 
 function editDetails($details) {
-    include 'connection.php';
+    include '../connection.php';
     $query = "UPDATE `customer` SET `name` = '$details[2]', `dob` = '$details[5]', `address` = '$details[3]', `contact number` = '$details[4]'  WHERE `customer`.`email id` = '$details[1]'";
 
     if($mysqli->query($query) === TRUE) {
@@ -35,8 +35,8 @@ function editDetails($details) {
 }
 
 function newDetails($details) {
-    include 'connection.php';
-    $query = "INSERT INTO `customer` (`id`, `name`, `dob`, `address`, `contact number`, `email id`) VALUES (NULL, '$details[2]', '$details[5]', '$details[3]', '$details[4]', '$details[1]');";
+    include '../connection.php';
+    $query = "INSERT INTO `customer` (`name`, `dob`, `address`, `contact number`, `email id`) VALUES ('$details[2]', '$details[5]', '$details[3]', '$details[4]', '$details[1]');";
 
     if($mysqli->query($query) === TRUE) {
     ?>
@@ -52,7 +52,7 @@ function newDetails($details) {
     else {
     ?>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-          <strong>The details could not be saved!</strong>
+          <strong>The details could not be saved!</strong><br>Error: <?php echo $mysqli->error; ?>
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

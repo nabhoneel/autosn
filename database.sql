@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 07, 2018 at 02:03 PM
+-- Generation Time: Feb 09, 2018 at 10:44 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -53,15 +53,6 @@ INSERT INTO `car has options` (`vehicle index`, `option id`) VALUES
 (4, 3),
 (4, 2),
 (4, 7),
-(5, 5),
-(5, 1),
-(5, 2),
-(5, 7),
-(6, 6),
-(6, 5),
-(6, 2),
-(6, 3),
-(6, 1),
 (7, 3),
 (7, 1),
 (7, 7),
@@ -80,13 +71,6 @@ INSERT INTO `car has options` (`vehicle index`, `option id`) VALUES
 (9, 1),
 (10, 3),
 (10, 4),
-(11, 1),
-(11, 3),
-(11, 7),
-(11, 2),
-(11, 4),
-(11, 5),
-(11, 6),
 (12, 6),
 (12, 5),
 (12, 3),
@@ -116,20 +100,8 @@ INSERT INTO `car has options` (`vehicle index`, `option id`) VALUES
 (17, 4),
 (17, 2),
 (17, 5),
-(18, 6),
-(18, 7),
-(18, 2),
-(18, 5),
-(18, 4),
-(18, 3),
-(18, 1),
 (19, 6),
 (19, 5),
-(20, 3),
-(20, 5),
-(20, 4),
-(20, 1),
-(20, 7),
 (21, 7),
 (21, 6),
 (21, 3),
@@ -183,10 +155,6 @@ INSERT INTO `car has options` (`vehicle index`, `option id`) VALUES
 (34, 4),
 (35, 1),
 (35, 5),
-(36, 4),
-(36, 7),
-(36, 2),
-(36, 1),
 (37, 3),
 (37, 6),
 (37, 4),
@@ -557,13 +525,6 @@ INSERT INTO `car has options` (`vehicle index`, `option id`) VALUES
 (112, 3),
 (112, 6),
 (112, 7),
-(113, 1),
-(113, 6),
-(113, 3),
-(113, 7),
-(113, 2),
-(113, 4),
-(113, 5),
 (114, 6),
 (114, 2),
 (114, 7),
@@ -621,22 +582,17 @@ INSERT INTO `cars` (`index number`, `company name`, `model name`) VALUES
 (2, 'Ford', 'Aspire'),
 (3, 'Ford', 'Aspire'),
 (4, 'Ford', 'Aspire'),
-(5, 'Ford', 'Aspire'),
-(6, 'Ford', 'Aspire'),
 (7, 'Ford', 'EcoSport'),
 (8, 'Ford', 'EcoSport'),
 (9, 'Ford', 'EcoSport'),
 (10, 'Ford', 'EcoSport'),
-(11, 'Ford', 'EcoSport'),
 (12, 'Ford', 'EcoSport'),
 (13, 'Ford', 'Endeavour'),
 (14, 'Ford', 'Endeavour'),
 (15, 'Ford', 'Endeavour'),
 (16, 'Ford', 'Endeavour'),
 (17, 'Ford', 'Endeavour'),
-(18, 'Ford', 'Endeavour'),
 (19, 'Ford', 'Figo'),
-(20, 'Ford', 'Figo'),
 (21, 'Ford', 'Figo'),
 (22, 'Ford', 'Figo'),
 (23, 'Ford', 'Figo'),
@@ -652,7 +608,6 @@ INSERT INTO `cars` (`index number`, `company name`, `model name`) VALUES
 (33, 'Honda', 'Accord'),
 (34, 'Honda', 'Accord'),
 (35, 'Honda', 'Accord'),
-(36, 'Honda', 'Accord'),
 (37, 'Honda', 'City'),
 (38, 'Honda', 'City'),
 (39, 'Honda', 'City'),
@@ -729,7 +684,6 @@ INSERT INTO `cars` (`index number`, `company name`, `model name`) VALUES
 (110, 'Maruti Suzuki', 'Ertiga'),
 (111, 'Maruti Suzuki', 'Ertiga'),
 (112, 'Maruti Suzuki', 'Ertiga'),
-(113, 'Maruti Suzuki', 'Ertiga'),
 (114, 'Maruti Suzuki', 'Ertiga'),
 (115, 'Maruti Suzuki', 'WagonR'),
 (116, 'Maruti Suzuki', 'WagonR'),
@@ -737,22 +691,6 @@ INSERT INTO `cars` (`index number`, `company name`, `model name`) VALUES
 (118, 'Maruti Suzuki', 'WagonR'),
 (119, 'Maruti Suzuki', 'WagonR'),
 (120, 'Maruti Suzuki', 'WagonR');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `car sold`
---
-
-CREATE TABLE `car sold` (
-  `id` int(11) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `model name` varchar(100) NOT NULL,
-  `company name` varchar(100) NOT NULL,
-  `sold by` varchar(100) NOT NULL,
-  `sold to` int(10) NOT NULL,
-  `total price` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -781,7 +719,6 @@ INSERT INTO `company` (`name`) VALUES
 --
 
 CREATE TABLE `customer` (
-  `id` int(10) NOT NULL,
   `name` varchar(100) NOT NULL,
   `dob` date NOT NULL,
   `address` varchar(100) NOT NULL,
@@ -793,12 +730,15 @@ CREATE TABLE `customer` (
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`id`, `name`, `dob`, `address`, `contact number`, `email id`) VALUES
-(1, 'Minakshi Mukherjee', '1997-02-04', 'JD-2, Salt Lake City, Kolkata 700013', 9850067829, 'minakshiupadhyay@yahoo.com'),
-(2, 'Mayukh Mukherjee', '1995-07-07', 'Behala, Kolkata 700010', 9745120311, 'yomayukh@gmail.com'),
-(3, 'Soumen Roy', '1995-02-20', 'FD 219, Salt Lake City, Kolkata 700106', 9830056167, 'soumen@the.hml'),
-(4, 'Jhinku', '1995-12-12', 'RKM Narendrapur', 9803345912, 'jhinku@rkm.com'),
-(5, 'Jhinku Roy Ghosh', '1994-05-11', '219 Gauri Bari', 9840567821, 'jhinku@gmail.com');
+INSERT INTO `customer` (`name`, `dob`, `address`, `contact number`, `email id`) VALUES
+('Suchandra Jha', '1995-06-13', 'Kalikapur', 8930519843, 'jhasuchandra@gmail.com'),
+('Jhinku Roy Ghosh', '1994-05-11', '219 Gauri Bari', 9840567821, 'jhinku@gmail.com'),
+('Jhinku Ray', '1995-12-12', 'RKM Narendrapur', 9803345912, 'jhinku@rkm.com'),
+('Minakshi Mukherjee', '1997-02-04', 'JD-2, Salt Lake City, Kolkata 700013', 9850067829, 'minakshiupadhyay@yahoo.com'),
+('Nabhoneel Majumdar', '1995-10-20', 'FD 219/8, Sector 3, Salt Lake City', 9830056192, 'nabhoneel.95@gmail.com'),
+('Nandini Majumdar', '1968-08-02', 'FD 219/8, Sector 3, Salt Lake City', 9830563493, 'nandini.majumdar@gmail.com'),
+('Soumen Roy', '1995-02-20', 'FD 219, Salt Lake City, Kolkata 700106', 9830056167, 'soumen@the.hml'),
+('Mayukh Mukherjee', '1995-07-07', 'Behala, Kolkata 700010', 9745120311, 'yomayukh@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -869,113 +809,6 @@ INSERT INTO `model` (`company name`, `model name`, `number of seats`, `cost`) VA
 -- --------------------------------------------------------
 
 --
--- Table structure for table `model has options`
---
-
-CREATE TABLE `model has options` (
-  `company name` varchar(100) NOT NULL,
-  `model name` varchar(100) NOT NULL,
-  `option id` int(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `model has options`
---
-
-INSERT INTO `model has options` (`company name`, `model name`, `option id`) VALUES
-('Ford', 'Aspire', 1),
-('Ford', 'Aspire', 2),
-('Ford', 'Aspire', 3),
-('Ford', 'Aspire', 4),
-('Ford', 'Aspire', 5),
-('Ford', 'EcoSport', 1),
-('Ford', 'EcoSport', 2),
-('Ford', 'EcoSport', 4),
-('Ford', 'EcoSport', 5),
-('Ford', 'EcoSport', 6),
-('Ford', 'Endeavour', 1),
-('Ford', 'Endeavour', 2),
-('Ford', 'Endeavour', 3),
-('Ford', 'Endeavour', 4),
-('Ford', 'Endeavour', 5),
-('Ford', 'Figo', 1),
-('Ford', 'Figo', 2),
-('Ford', 'Figo', 5),
-('Ford', 'Mustang', 1),
-('Ford', 'Mustang', 2),
-('Ford', 'Mustang', 3),
-('Ford', 'Mustang', 4),
-('Ford', 'Mustang', 5),
-('Ford', 'Mustang', 6),
-('Ford', 'Mustang', 7),
-('Honda', 'Accord', 1),
-('Honda', 'Accord', 2),
-('Honda', 'Accord', 3),
-('Honda', 'Accord', 4),
-('Honda', 'Accord', 5),
-('Honda', 'City', 1),
-('Honda', 'City', 2),
-('Honda', 'City', 3),
-('Honda', 'City', 4),
-('Honda', 'City', 5),
-('Honda', 'City', 6),
-('Honda', 'City', 7),
-('Honda', 'CR-V', 1),
-('Honda', 'CR-V', 2),
-('Honda', 'CR-V', 3),
-('Honda', 'CR-V', 5),
-('Honda', 'CR-V', 6),
-('Honda', 'Jazz', 1),
-('Honda', 'Jazz', 2),
-('Honda', 'Jazz', 6),
-('Honda', 'Mobilio', 1),
-('Honda', 'Mobilio', 2),
-('Honda', 'Mobilio', 5),
-('Honda', 'Mobilio', 6),
-('Honda', 'Mobilio', 7),
-('Hyundai', 'Creta', 1),
-('Hyundai', 'Creta', 2),
-('Hyundai', 'Creta', 5),
-('Hyundai', 'Creta', 6),
-('Hyundai', 'Creta', 7),
-('Hyundai', 'Eon', 1),
-('Hyundai', 'Eon', 5),
-('Hyundai', 'Excent', 1),
-('Hyundai', 'Excent', 2),
-('Hyundai', 'Excent', 5),
-('Hyundai', 'Excent', 6),
-('Hyundai', 'Verna', 1),
-('Hyundai', 'Verna', 2),
-('Hyundai', 'Verna', 5),
-('Maruti Suzuki', 'Alto', 1),
-('Maruti Suzuki', 'Alto', 2),
-('Maruti Suzuki', 'Alto', 5),
-('Maruti Suzuki', 'Alto', 7),
-('Maruti Suzuki', 'Baleno', 1),
-('Maruti Suzuki', 'Baleno', 2),
-('Maruti Suzuki', 'Baleno', 3),
-('Maruti Suzuki', 'Baleno', 4),
-('Maruti Suzuki', 'Baleno', 5),
-('Maruti Suzuki', 'Baleno', 7),
-('Maruti Suzuki', 'Brezza', 1),
-('Maruti Suzuki', 'Brezza', 2),
-('Maruti Suzuki', 'Brezza', 3),
-('Maruti Suzuki', 'Brezza', 4),
-('Maruti Suzuki', 'Brezza', 5),
-('Maruti Suzuki', 'Brezza', 6),
-('Maruti Suzuki', 'Brezza', 7),
-('Maruti Suzuki', 'Ertiga', 1),
-('Maruti Suzuki', 'Ertiga', 2),
-('Maruti Suzuki', 'Ertiga', 5),
-('Maruti Suzuki', 'Ertiga', 6),
-('Maruti Suzuki', 'Ertiga', 7),
-('Maruti Suzuki', 'WagonR', 1),
-('Maruti Suzuki', 'WagonR', 2),
-('Maruti Suzuki', 'WagonR', 5);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `options`
 --
 
@@ -998,6 +831,96 @@ INSERT INTO `options` (`id`, `option name`, `cost`) VALUES
 (6, 'Alloy wheels', 10000),
 (7, '5 years\' servicing', 20000);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sold car`
+--
+
+CREATE TABLE `sold car` (
+  `id` int(11) NOT NULL,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `vehicle index` int(10) NOT NULL,
+  `company name` varchar(100) NOT NULL,
+  `model name` varchar(100) NOT NULL,
+  `sold by` varchar(100) NOT NULL,
+  `sold to` varchar(100) NOT NULL,
+  `total price` int(10) NOT NULL,
+  `credit card number` varchar(100) NOT NULL,
+  `expiry month` varchar(100) NOT NULL,
+  `expiry year` int(10) NOT NULL,
+  `cvv` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sold car`
+--
+
+INSERT INTO `sold car` (`id`, `datetime`, `vehicle index`, `company name`, `model name`, `sold by`, `sold to`, `total price`, `credit card number`, `expiry month`, `expiry year`, `cvv`) VALUES
+(5, '2017-10-09 21:36:52', 5, 'Ford', 'Aspire', 'nabhoneelm', 'jhasuchandra@gmail.com', 601000, '5423 7589 4992 3484', '2', 2018, 222),
+(6, '2017-11-15 21:36:49', 6, 'Ford', 'Aspire', 'nabhoneelm', 'yomayukh@gmail.com', 592100, '2452 3465 4236 4735', '1', 2018, 435),
+(7, '2018-01-01 21:36:44', 11, 'Ford', 'EcoSport', 'nabhoneelm', 'minakshiupadhyay@yahoo.com', 892100, '3464 3677 3567 5368', '1', 2018, 324),
+(8, '2018-01-09 21:36:40', 18, 'Ford', 'Endeavour', 'nabhoneelm', 'jhinku@gmail.com', 2679100, '4389 5709 8435 9023', '3', 2018, 676),
+(9, '2018-03-07 20:43:10', 113, 'Maruti Suzuki', 'Ertiga', 'nabhoneelm', 'nabhoneel.95@gmail.com', 875100, '5943 5934 9859 0238', '1', 2018, 234),
+(10, '2018-04-10 21:33:22', 20, 'Ford', 'Figo', 'nabhoneelm', 'nandini.majumdar@gmail.com', 649100, '2323 8473 8789 3275', '6', 2018, 283),
+(11, '2018-02-09 21:42:58', 36, 'Honda', 'Accord', 'nabhoneelm', 'nandini.majumdar@gmail.com', 3744000, '2837 4892 3797 9579', '4', 2018, 534);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sold car has options`
+--
+
+CREATE TABLE `sold car has options` (
+  `vehicle index` int(10) NOT NULL,
+  `option id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sold car has options`
+--
+
+INSERT INTO `sold car has options` (`vehicle index`, `option id`) VALUES
+(5, 5),
+(5, 1),
+(5, 2),
+(5, 7),
+(6, 6),
+(6, 5),
+(6, 2),
+(6, 3),
+(6, 1),
+(11, 1),
+(11, 3),
+(11, 7),
+(11, 2),
+(11, 4),
+(11, 5),
+(11, 6),
+(18, 6),
+(18, 7),
+(18, 2),
+(18, 5),
+(18, 4),
+(18, 3),
+(18, 1),
+(113, 1),
+(113, 6),
+(113, 3),
+(113, 7),
+(113, 2),
+(113, 4),
+(113, 5),
+(20, 3),
+(20, 5),
+(20, 4),
+(20, 1),
+(20, 7),
+(36, 4),
+(36, 7),
+(36, 2),
+(36, 1);
+
 --
 -- Indexes for dumped tables
 --
@@ -1013,16 +936,8 @@ ALTER TABLE `car has options`
 -- Indexes for table `cars`
 --
 ALTER TABLE `cars`
-  ADD PRIMARY KEY (`index number`);
-
---
--- Indexes for table `car sold`
---
-ALTER TABLE `car sold`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `company name` (`company name`,`model name`),
-  ADD KEY `sold by` (`sold by`),
-  ADD KEY `sold to` (`sold to`);
+  ADD PRIMARY KEY (`index number`),
+  ADD KEY `company name` (`company name`,`model name`);
 
 --
 -- Indexes for table `company`
@@ -1034,9 +949,7 @@ ALTER TABLE `company`
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email id` (`email id`),
-  ADD KEY `email id_2` (`email id`);
+  ADD PRIMARY KEY (`email id`);
 
 --
 -- Indexes for table `members`
@@ -1052,18 +965,26 @@ ALTER TABLE `model`
   ADD PRIMARY KEY (`company name`,`model name`);
 
 --
--- Indexes for table `model has options`
---
-ALTER TABLE `model has options`
-  ADD UNIQUE KEY `company name_2` (`company name`,`model name`,`option id`),
-  ADD KEY `option id` (`option id`),
-  ADD KEY `company name` (`company name`,`model name`);
-
---
 -- Indexes for table `options`
 --
 ALTER TABLE `options`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sold car`
+--
+ALTER TABLE `sold car`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sold by` (`sold by`),
+  ADD KEY `sold to` (`sold to`),
+  ADD KEY `company name` (`company name`,`model name`),
+  ADD KEY `vehicle index` (`vehicle index`);
+
+--
+-- Indexes for table `sold car has options`
+--
+ALTER TABLE `sold car has options`
+  ADD KEY `sold car has options_ibfk_1` (`vehicle index`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1075,20 +996,15 @@ ALTER TABLE `options`
 ALTER TABLE `cars`
   MODIFY `index number` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 --
--- AUTO_INCREMENT for table `car sold`
---
-ALTER TABLE `car sold`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `customer`
---
-ALTER TABLE `customer`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
 -- AUTO_INCREMENT for table `options`
 --
 ALTER TABLE `options`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `sold car`
+--
+ALTER TABLE `sold car`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- Constraints for dumped tables
 --
@@ -1097,16 +1013,14 @@ ALTER TABLE `options`
 -- Constraints for table `car has options`
 --
 ALTER TABLE `car has options`
-  ADD CONSTRAINT `car has options_ibfk_1` FOREIGN KEY (`option id`) REFERENCES `options` (`id`),
-  ADD CONSTRAINT `car has options_ibfk_2` FOREIGN KEY (`vehicle index`) REFERENCES `cars` (`index number`);
+  ADD CONSTRAINT `car has options_ibfk_1` FOREIGN KEY (`option id`) REFERENCES `options` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `car has options_ibfk_2` FOREIGN KEY (`vehicle index`) REFERENCES `cars` (`index number`) ON DELETE CASCADE;
 
 --
--- Constraints for table `car sold`
+-- Constraints for table `cars`
 --
-ALTER TABLE `car sold`
-  ADD CONSTRAINT `car sold_ibfk_1` FOREIGN KEY (`company name`,`model name`) REFERENCES `model` (`company name`, `model name`),
-  ADD CONSTRAINT `car sold_ibfk_2` FOREIGN KEY (`sold by`) REFERENCES `members` (`username`),
-  ADD CONSTRAINT `car sold_ibfk_3` FOREIGN KEY (`sold to`) REFERENCES `customer` (`id`);
+ALTER TABLE `cars`
+  ADD CONSTRAINT `cars_ibfk_1` FOREIGN KEY (`company name`,`model name`) REFERENCES `model` (`company name`, `model name`);
 
 --
 -- Constraints for table `members`
@@ -1121,11 +1035,18 @@ ALTER TABLE `model`
   ADD CONSTRAINT `model_ibfk_1` FOREIGN KEY (`company name`) REFERENCES `company` (`name`);
 
 --
--- Constraints for table `model has options`
+-- Constraints for table `sold car`
 --
-ALTER TABLE `model has options`
-  ADD CONSTRAINT `model has options_ibfk_1` FOREIGN KEY (`option id`) REFERENCES `options` (`id`),
-  ADD CONSTRAINT `model has options_ibfk_2` FOREIGN KEY (`company name`,`model name`) REFERENCES `model` (`company name`, `model name`);
+ALTER TABLE `sold car`
+  ADD CONSTRAINT `sold car_ibfk_2` FOREIGN KEY (`sold by`) REFERENCES `members` (`username`),
+  ADD CONSTRAINT `sold car_ibfk_4` FOREIGN KEY (`company name`,`model name`) REFERENCES `model` (`company name`, `model name`),
+  ADD CONSTRAINT `sold car_ibfk_5` FOREIGN KEY (`sold to`) REFERENCES `customer` (`email id`);
+
+--
+-- Constraints for table `sold car has options`
+--
+ALTER TABLE `sold car has options`
+  ADD CONSTRAINT `sold car has options_ibfk_1` FOREIGN KEY (`vehicle index`) REFERENCES `sold car` (`vehicle index`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
