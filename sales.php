@@ -19,7 +19,22 @@
       }
 
       function order() {
-        window.location.href='./generateBill.php?index='+index;
+        var flag = false;
+        var checks = document.getElementsByTagName("input");
+        for(var i=0; i<checks.length; i++) {
+            if(checks[i].type=='radio' && checks[i].checked == true) flag = true;
+        }
+        if(flag) window.location.href='./generateBill.php?index='+index;
+        else {
+            $("#alert_success").show();
+            $("#alert_success").css('opacity', '1');
+            window.setTimeout(function() {
+                $("#alert_success").fadeTo(500, 0).slideUp(500, function(){
+                    $(this).remove();
+                });
+            }, 4000);
+            return;
+        }
       }
     </script>
 </head>
@@ -57,7 +72,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="order()">Order!</button>
+        <button type="button" class="btn btn-primary" onclick="order()">Proceed</button>
       </div>
     </div>
   </div>

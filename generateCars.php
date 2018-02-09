@@ -14,17 +14,17 @@ for ($i = 0; $i < count($ticked_options) - 1; $i++) {
 }
 unset($ticked_options[count($ticked_options) - 1]);//only the ticked options remain
 
-setlocale(LC_MONETARY, 'en_IN.UTF-8');
-$count = 1;
+$fmt = new NumberFormatter('en_IN', NumberFormatter::CURRENCY);
 
+$count = 1;
 $currentSet = "";
 $prevSet = "";
-$counter = 0;
+$counter = 1;
 $first_row = 1;
 ?>
 
-<table class="table" id="carsTable">
-    <thead>
+<table class="table" id="carsTable" style="text-align: center;">
+    <thead class="thead-dark">
         <tr>
             <th>#</th>
             <th>Company</th>
@@ -65,20 +65,20 @@ $first_row = 1;
                         </td>
                         <?php
                     }
-                    echo "<td>".$count."<td>".$row["company name"]."</td><td>".$row["model name"]."</td>";
-                    echo "<td>".$row["cost"]."</td><td>".$row["number of seats"]."</td>";
+                    echo "<td>".$counter++."<td>".$row["company name"]."</td><td>".$row["model name"]."</td>";
+                    echo "<td>".$fmt->formatCurrency($row["cost"], "INR")."</td><td>".$row["number of seats"]."</td>";
                     ?>
                     <td>
                         <!--Expand button:-->
                         <button type="button" class="carsExpand btn btn-lg btn-info collapsed" data-toggle="collapse" data-target="#optionsSection<?php echo $count; ?>"></button>
 
-                        <tr>
-                            <td colspan=5>
+                        <tr align="center">
+                            <td colspan=6>
                                 <div id="optionsSection<?php echo $count; ?>" class="collapse">
-                                    <table>
-                                        <thead>
+                                    <table class="table">
+                                        <thead class="thead-light">
                                             <tr>
-                                                <th><?php echo $count; ?></th>
+                                                <th></th>
                                                 <th>Options</th>
                                                 <th>Total Cost</th>
                                             </tr>
@@ -96,7 +96,7 @@ $first_row = 1;
                                                 </label>
                                             </td>
                                             <td><?php echo $optionName; ?></td>
-                                            <td><?php echo array_sum($cost); ?></td>
+                                            <td><?php echo $fmt->formatCurrency(array_sum($cost), "INR"); ?></td>
                                         </tr>
 
                                         <?php

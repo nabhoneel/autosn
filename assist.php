@@ -1,5 +1,16 @@
 <script>
 function showCars() {
+    if(document.getElementById("number of seats").value == 0) {
+        $("#need_seats").show();
+        $("#need_seats").css('opacity', '1');
+        window.setTimeout(function() {
+            $("#need_seats").fadeTo(500, 0).slideUp(500, function(){
+                $(this).hide();
+            });
+        }, 4000);
+        return;
+        return;
+    }
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -38,7 +49,14 @@ function showCars() {
     ?>
 </div>
 <div class="item3">
-    <button type="button" class="btn btn-outline-info" onmousedown="showCars()">Cars <i class="fa fa-hand-o-down" aria-hidden="true"></i></button>
+    <button type="button" class="btn btn-outline-info" onclick="showCars()">Cars <i class="fa fa-hand-o-down" aria-hidden="true"></i></button>
 </div>
+<div style="display: none; grid-column: 1 / span 3;" id="alert_success" class="alert alert-info alert-dismissible fade show item5" role="alert">
+  <strong>Wait!</strong> You need to select a car first. (Enter the number of required seats and hit the 'Cars' button, if you haven't already)
+</div>
+<div style="display: none; grid-column: 1 / span 4;" id="need_seats" class="alert alert-info alert-dismissible fade show item5" role="alert">
+  First enter the <strong>number of required seats</strong> for generating a list of cars
+</div>
+
 <div class="item4" id="cars">
 </div>
