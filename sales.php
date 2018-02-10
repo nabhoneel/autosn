@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?php
+include 'verify.php';
+verify();
+?>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -40,9 +43,8 @@
     }
     </script>
 </head>
-<?php session_start(); $_SESSION["sales username"] = "nabhoneelm"; ?>
 <nav class="navbar navbar-expand-lg" style="background: #134756;">
-    <a class="navbar-brand" style="color: white;">Hello, <?php echo $_SESSION["sales username"]; ?></a>
+    <a class="navbar-brand" style="color: white;">Hello, <?php echo getUsername(); ?></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
