@@ -118,3 +118,12 @@ a.nav-link {
     color: #fff;
     background-color: #bb3b3b;
 }
+
+.badge-warning {
+    margin: 0 auto 1em auto !important;
+    padding: 0.5em 1em !important;
+    color: #212529 !important;
+    background-color: #ffc107 !important;
+    font-size: 0.9em !important;
+    font-weight: 500 !important;
+}

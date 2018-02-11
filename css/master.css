@@ -8,6 +8,16 @@
  font-family: 'BentonSans';
 }
 
+.modal-content {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 5px 22px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 5px 22px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 5px 22px 0px rgba(0,0,0,0.75);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding-box;
+    background-clip: padding-box;
+}
+
 .control-group {
     display: inline-block;
     vertical-align: top;

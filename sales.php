@@ -108,7 +108,7 @@ verify();
             }
             ?>
         </div>
-        <script type="text/javascript" src="js/salesComparison.js"></script>
+        <script type="text/javascript" src="js/charts/salesComparison.js"></script>
     </div>
 </div>
 
