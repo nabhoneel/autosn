@@ -1,10 +1,4 @@
-<?php
-session_start();
-if(empty($_SESSION)) header("Location: http://localhost/xampp/autosn?previous=dealer");
-if(!($_SESSION["verification"] == "true")) header("Location: http://localhost/xampp/autosn?previous=dealer");
 
-$employer = $_SESSION["employer"];
-?>
 
 <!DOCTYPE html>
 <html>

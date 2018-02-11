@@ -1,4 +1,5 @@
 <?php
+session_start();
 $type = $username = $employer = $verify = "";
 
 if(isset($_SESSION["valid"])) {
@@ -23,7 +24,7 @@ function getEmployer() {
 }
 
 function verify() {
-    if($GLOBALS['verify'] == "false") header("Location: ./");
+    if(!isset($_SESSION["valid"])) {header("Location: ./");}
 }
 
 ?>

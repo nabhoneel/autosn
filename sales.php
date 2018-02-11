@@ -65,7 +65,7 @@ verify();
     <?php
 
     include 'connection.php';
-    $results = $mysqli->query("SELECT * FROM `sold car`");
+    $results = $mysqli->query("SELECT * FROM `sold car` WHERE `sold by`='".getUsername()."';");
     $fmt = new NumberFormatter('en_IN', NumberFormatter::CURRENCY);
 
     ?>
@@ -107,7 +107,7 @@ verify();
         <canvas id="salesComparison" width=740></canvas>
         <div class="btn-group" role="group" aria-label="Basic example" style="padding: 2em 0 1em 0;">
             <?php
-            $years = $mysqli->query("SELECT YEAR(`datetime`) AS 'years' FROM `sold car` GROUP BY YEAR(`datetime`)");
+            $years = $mysqli->query("SELECT YEAR(`datetime`) AS 'years' FROM `sold car` WHERE `sold by`='".getUsername()."' GROUP BY YEAR(`datetime`)");
             foreach($years as $y) {
                 ?>
                 <button type="button" class="btn btn-warning" onclick="changeYear(<?php echo $y["years"]; ?>)"><?php echo $y["years"]; ?></button>
