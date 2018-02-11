@@ -209,3 +209,11 @@ function showSlides() {
     setTimeout(showSlides, 2000); // Change image every 2 seconds
 }
 </script>
+
+
+
+
+
+
+
+SELECT SUM(`total price`) AS 'sum', YEAR(`datetime`) AS 'year', MONTH(`datetime`) AS 'month' FROM `company` NATURAL JOIN `sold car` GROUP BY YEAR(`datetime`), MONTH(`datetime`)

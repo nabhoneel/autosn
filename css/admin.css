@@ -1,0 +1,120 @@
+@import "master.css";
+
+.grid {
+    display: grid;
+    grid-template-columns: 15% 85%;
+    height: 100vh;
+    background-color: white;
+}
+
+.logo, img {
+    margin: 1em auto 0 auto;
+    display: table;
+}
+
+.logo {
+    padding: 0;
+    font-family: 'BentonSans';
+    font-size: 1.8em;
+    font-weight: 800;
+    transform: scale(1, .95);
+    color: white;
+    text-align: center;
+    background-color: #00000000;
+}
+
+.sidebar {
+    background-color: #313642;
+}
+
+.content-area {
+    padding: 0 2em !important;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    margin-bottom: 1em;
+}
+
+.dashboard-grid > div > h1 {
+    font-size: 2rem !important;
+}
+
+.dashboard-grid > div > h4 {
+    font-weight: 300;
+}
+
+.dashboard-grid > div > h1 {
+    font-weight: 400;
+}
+
+.item1, .item2 {
+
+}
+
+.top-company, .top-model, .gross-sales, .top-seller {
+    padding: 1em;
+    margin: 0.5em;
+    background-color: #f19c15;
+    border-radius: 0.4em;
+    color: white;
+}
+
+.top-model {
+    background-color: #3373b6;
+}
+
+.gross-sales {
+    background-color: #8e5ea2;
+}
+
+.top-seller {
+    background-color: #45996f;
+}
+
+.top-company > h1 {
+    font-weight: 600;
+}
+
+.company-sales, .all-sales-graph, .seller-comparison {
+    grid-column: 1 / 3;
+    background-color: #e6e5e5;
+    margin: 0.5em;
+    border-radius: 0.5em;
+    padding: 1em;
+}
+
+.seller-comparison {
+    grid-column: 3 / 5;
+}
+
+.all-sales-graph {
+    grid-column: 1 / 6;
+}
+
+nav.navbar {
+    margin: 0.5em 0 !important;
+    padding: 0.5em 0 1.5em 0 !important;
+    padding-bottom: 1.5em !important;
+    border-bottom: 1px #d8d8d8 solid !important;
+}
+
+.flex-column {
+    margin: 2em 0;
+}
+
+a.nav-link {
+    padding: 0.8em 2em;
+    color: #a5a5a5;
+    border-bottom: 1px #4a4a4a solid;
+}
+
+.fa {
+    padding: 0 0.5em 0 0 !important;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #bb3b3b;
+}

@@ -1,3 +1,13 @@
+@font-face {
+    font-family: 'BentonSans';
+    src: url("fonts/BentonSans Book.otf") format("opentype");
+}
+
+* {
+ font-size: 1em;
+ font-family: 'BentonSans';
+}
+
 .control-group {
     display: inline-block;
     vertical-align: top;

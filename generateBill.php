@@ -20,7 +20,7 @@
             </li>
         </ul>
         <button type="button" class="btn btn-outline-light" onclick="window.history.back()" style="margin: 0 1em">Go back</button>
-        <button type="button" class="btn btn-outline-light" onclick="window.location.href='./includes/logout.php"'">Logout</button>
+        <button type="button" class="btn btn-outline-light" onclick="window.location.href='./includes/logout.php'">Logout</button>
     </div>
 </nav>
 
