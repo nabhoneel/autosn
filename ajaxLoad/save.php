@@ -1,5 +1,6 @@
 <?php
-
+include '../includes/verify.php';
+verify();
 header('Content-type: application/json');
 $json = file_get_contents('php://input');
 $details = json_decode($json, true);

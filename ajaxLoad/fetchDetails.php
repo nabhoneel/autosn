@@ -1,5 +1,6 @@
 <?php
-
+include '../includes/verify.php';
+verify();
 include '../includes/connection.php';
 $email = $_POST["email"];
 $results = $mysqli->query("SELECT * FROM `customer` WHERE `email id` = '$email'");

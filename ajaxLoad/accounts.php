@@ -1,5 +1,6 @@
 <?php
-
+include '../includes/verify.php';
+verify();
 include '../includes/connection.php';
 $email = $_POST["email"];
 $query = "SELECT * FROM `customer`";

@@ -1,4 +1,6 @@
 <?php
+include '../verify/verify.php';
+verify();
 include '../includes/connection.php';
 $ticked_options = json_decode(htmlspecialchars_decode($_POST["options"]));
 

@@ -1,7 +1,7 @@
 <?php
-include '../includes/connection.php';
 include '../includes/verify.php';
 verify();
+include '../includes/connection.php';
 $data_array = [];
 foreach ($_POST as $key => $value)
     $data_array[$key] = $value;
