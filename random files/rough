@@ -17,7 +17,7 @@
   <tbody>
 
 	<?php
-	include 'connection.php';
+	include 'includes/connection.php';
 	header('Content-type: application/json');
 	$json = file_get_contents('php://input');
 	$json_decode = json_decode($json, true);

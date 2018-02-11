@@ -8,7 +8,7 @@ if($details[0] == 0) editDetails($details);
 else newDetails($details);
 
 function editDetails($details) {
-    include '../connection.php';
+    include '../includes/connection.php';
     $query = "UPDATE `customer` SET `name` = '$details[2]', `dob` = '$details[5]', `address` = '$details[3]', `contact number` = '$details[4]'  WHERE `customer`.`email id` = '$details[1]'";
 
     if($mysqli->query($query) === TRUE) {
@@ -35,7 +35,7 @@ function editDetails($details) {
 }
 
 function newDetails($details) {
-    include '../connection.php';
+    include '../includes/connection.php';
     $query = "INSERT INTO `customer` (`name`, `dob`, `address`, `contact number`, `email id`) VALUES ('$details[2]', '$details[5]', '$details[3]', '$details[4]', '$details[1]');";
 
     if($mysqli->query($query) === TRUE) {

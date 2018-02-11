@@ -1,6 +1,6 @@
 <?php
 
-include 'connection.php';
+include 'includes/connection.php';
 
 $whichUser = $_POST["id"];
 $username = $_POST["username"];

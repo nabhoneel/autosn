@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include '../connection.php';
+include '../includes/connection.php';
 $user = $mysqli->query("SELECT * FROM `members` WHERE `username`='".$_POST["username"]."';");
 
 $_SESSION["valid"] = "false";

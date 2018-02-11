@@ -1,6 +1,6 @@
 <?php
 
-include '../connection.php';
+include '../includes/connection.php';
 $email = $_POST["email"];
 $results = $mysqli->query("SELECT * FROM `customer` WHERE `email id` = '$email'");
 $userDetails = $results->fetch_array(MYSQLI_NUM);

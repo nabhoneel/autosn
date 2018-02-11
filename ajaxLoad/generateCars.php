@@ -1,16 +1,8 @@
 <?php
-include '../connection.php';
-header('Content-type: application/json');
-$json = file_get_contents('php://input');
-//ticked_options structure: [0]=>'number of seats'; [rest]=>'ticked options'
-$ticked_options = json_decode($json, true);
+include '../includes/connection.php';
+$ticked_options = json_decode(htmlspecialchars_decode($_POST["options"]));
 
-$results = $mysqli->query("SELECT `cars`.`index number`, `cars`.`company name`, `cars`.`model name`, `model`.`number of seats`, `model`.`cost` FROM `cars` NATURAL JOIN `model` WHERE `model`.`number of seats` >= $ticked_options[0];");
-
-for ($i = 0; $i < count($ticked_options) - 1; $i++) {
-    $ticked_options[$i] = $ticked_options[$i + 1];
-}
-unset($ticked_options[count($ticked_options) - 1]);//only the ticked options remain
+$results = $mysqli->query("SELECT `cars`.`index number`, `cars`.`company name`, `cars`.`model name`, `model`.`number of seats`, `model`.`cost` FROM `cars` NATURAL JOIN `model` WHERE `model`.`number of seats` >= ".$_POST["number"]);
 
 $fmt = new NumberFormatter('en_IN', NumberFormatter::CURRENCY);
 

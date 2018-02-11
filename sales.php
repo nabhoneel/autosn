@@ -1,22 +1,15 @@
 <?php
-include 'verify.php';
+include 'includes/verify.php';
 verify();
 ?>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Sales Profile</title>
+    <?php include './includes/header.php'; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <script type="text/javascript" src="js/Chart.min.js"></script>
     <link rel="stylesheet" href="./css/sales.css">
     <link rel="stylesheet" type="text/css" media="screen" href="./css/assist.css" />
-    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="./js/jquery.min.js"></script>
-    <script src="./bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/Chart.min.js"></script>
     <script>
     var index;
     function getValues(id) {
@@ -56,7 +49,7 @@ verify();
             </li>
         </ul>
         <button type="button" class="btn btn-outline-light"  data-toggle="modal" data-target="#assistModal" style="margin: 0 1em">Assist Customer</button>
-        <button type="button" class="btn btn-outline-light" onclick="window.location.href='./logout.php'">Logout</button>
+        <button type="button" class="btn btn-outline-light" onclick="window.location.href='./includes/logout.php'">Logout</button>
     </div>
 </nav>
 
@@ -64,7 +57,7 @@ verify();
 
     <?php
 
-    include 'connection.php';
+    include 'includes/connection.php';
     $results = $mysqli->query("SELECT * FROM `sold car` WHERE `sold by`='".getUsername()."';");
     $fmt = new NumberFormatter('en_IN', NumberFormatter::CURRENCY);
 

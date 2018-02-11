@@ -14,7 +14,7 @@ $c = $_SESSION["employer"];
 <body>
 
 <?php
-include "connection.php";
+include "includes/connection.php";
 function value_set($val)
 {
 	if (!isset($_POST[$val]))

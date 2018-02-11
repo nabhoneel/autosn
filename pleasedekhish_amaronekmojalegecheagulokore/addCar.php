@@ -63,7 +63,7 @@ $c = $_SESSION["employer"];
                 </div>
                 <div class="col-sm-9">
                     <?php
-                            include 'connection.php';
+                            include 'includes/connection.php';
                             $rows = $mysqli->query("select `id`, `option name` from `options`;");
                             ?>
                             <b>Select options available :</b>

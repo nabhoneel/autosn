@@ -1,7 +1,7 @@
 <?php
-session_start();
-$_SESSION["sales username"] = "nabhoneelm";
-include '../connection.php';
+include '../includes/connection.php';
+include '../includes/verify.php';
+verify();
 $data_array = [];
 foreach ($_POST as $key => $value)
     $data_array[$key] = $value;
@@ -13,7 +13,7 @@ $sold_car_insert_query = "INSERT INTO `sold car` (`vehicle index`, `company name
     $data_array["vehicle_index"]."', '".
     $modelDetails[0]."', '".
     $modelDetails[1]."', '".
-    $_SESSION["sales username"]."', '".
+    getUsername()."', '".
     $data_array["email"]."', '".
     $data_array["totalCost"]."', '".
     $data_array["creditcard"]."', '".

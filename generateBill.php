@@ -1,216 +1,11 @@
 <!DOCTYPE html>
+<?php include 'includes/verify.php'; verify(); ?>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Payment</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" href="./css/bill.css">
-    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="./js/jquery.min.js"></script>
-    <script src="./bootstrap/js/bootstrap.min.js"></script>
-    <script>
-    function showResult(str) {
-        if (str.length==0) {
-            document.getElementById("showids").innerHTML="";
-            document.getElementById("showids").style.border="0px";
-            document.getElementById("detailsbutton").disabled = true;
-            return;
-        }
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp=new XMLHttpRequest();
-        } else {  // code for IE6, IE5
-            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange=function() {
-            if (this.readyState==4 && this.status==200) {
-                document.getElementById("showids").innerHTML=this.responseText;
-                document.getElementById("showids").style.border="1px solid #A5ACB2";
-            }
-        }
-        document.getElementById("detailsbutton").disabled = false;
-        xmlhttp.open("GET","ajaxLoad/accounts.php?q="+str,true);
-        xmlhttp.send();
-    }
-    function writeToTextArea(str) {
-        if(str.length > 0) {
-            document.getElementById("emailid").value = str;
-        }
-        document.getElementById("showids").innerHTML="";
-        document.getElementById("showids").style.border="0px";
-    }
-    function getDetails() {
-        var str = document.getElementById("emailid").value;
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp=new XMLHttpRequest();
-        } else {  // code for IE6, IE5
-            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange=function() {
-            if (this.readyState==4 && this.status==200) {
-                document.getElementById("oldFormBody").innerHTML=this.responseText;
-            }
-        }
-        xmlhttp.open("POST", "ajaxLoad/fetchDetails.php", true);
-        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.send("email=" + str);
-    }
-    function makeEditable(x) {
-        if(x === 1) {
-            document.getElementById("oldname").readOnly = false;
-            document.getElementById("oldaddress").readOnly = false;
-            document.getElementById("oldcontact").readOnly = false;
-            document.getElementById("olddob").readOnly = false;
-            document.getElementById("saveOld").disabled = false;
-        }
-        else {
-            document.getElementById("oldname").readOnly = true;
-            document.getElementById("oldaddress").readOnly = true;
-            document.getElementById("oldcontact").readOnly = true;
-            document.getElementById("olddob").readOnly = true;
-            document.getElementById("saveOld").disabled = true;
-        }
-    }
-    function saveOld() {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("alertSuccess").innerHTML = this.responseText;
-                if(document.getElementById("queryStatus").value=="success") makeEditable(0);
-            }
-        };
-        var details = [];
-        details.push(0);
-        details.push(document.getElementById("emailid").value);
-        details.push(document.getElementById("oldname").value);
-        details.push(document.getElementById("oldaddress").value);
-        details.push(document.getElementById("oldcontact").value);
-        details.push(document.getElementById("olddob").value);
-
-        xmlhttp.open("POST", "save.php", true);
-        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xmlhttp.send(JSON.stringify(details));
-    }
-    function saveNew() {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("alertSuccessNew").innerHTML = this.responseText;
-            }
-        };
-        var details = [];
-        details.push(1);
-        details.push(document.getElementById("emailnew").value);
-        details.push(document.getElementById("namenew").value);
-        details.push(document.getElementById("addressnew").value);
-        details.push(document.getElementById("contactnew").value);
-        details.push(document.getElementById("dobnew").value);
-
-        xmlhttp.open("POST", "ajaxLoad/save.php", true);
-        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xmlhttp.send(JSON.stringify(details));
-    }
-    function proceed() {
-        $('#confirmDialog').modal('hide');
-        $('#paymentDialog').modal('show');
-    }
-    function finishOrder(which) {
-        var details = [];
-        if($('.nav-tabs .active').text() == "Returning customer") {
-            details.push(document.getElementById("emailid").value);
-            details.push(document.getElementById("oldname").value);
-            details.push(document.getElementById("olddob").value);
-            details.push(document.getElementById("oldcontact").value);
-            details.push(document.getElementById("oldaddress").value);
-            for(var i=0; i<details.length; i++) {
-                if(details[i].length == 0) {
-
-                    $(".returning-customer-alert").show();
-                    $('.returning-customer-alert').css('opacity', '1');
-                    window.setTimeout(function() {
-                        $(".returning-customer-alert").fadeTo(500, 0).slideUp(500, function(){
-                            $(this).hide();
-                        });
-                    }, 4000);
-                    return;
-                }
-            }
-        }
-        else {
-            details.push(document.getElementById("emailnew").value);
-            details.push(document.getElementById("namenew").value);
-            details.push(document.getElementById("dobnew").value);
-            details.push(document.getElementById("contactnew").value);
-            details.push(document.getElementById("addressnew").value);
-            for(var i=0; i<details.length; i++) {
-                if(details[i].length == 0) {
-
-                    $(".new-customer-alert").show();
-                    $('.new-customer-alert').css('opacity', '1');
-                    window.setTimeout(function() {
-                        $(".new-customer-alert").fadeTo(500, 0).slideUp(500, function(){
-                            $(this).hide();
-                        });
-                    }, 4000);
-                    return;
-                }
-            }
-        }
-        details.push(document.getElementById('vin').value);
-        if(which != "Pay") $('#confirmDialog').modal('show');
-        else {
-            var d = new Date();
-            if($("#creditCardNumber").val().length < 16)
-                setAlert(".paymentAlert", "Enter a valid credit card number");
-            else if(($("#month").val()-1) <= d.getMonth() && $("#year").val()==d.getFullYear())
-                setAlert(".paymentAlert", "Enter a valid expiry date");
-            else if($("#cvv").val().length < 3)
-                setAlert(".paymentAlert", "Enter a valid CVV");
-
-            $.ajax({
-                type: "POST",
-                url: 'ajaxLoad/makeTransaction.php',
-                data: {
-                    email: details[0],
-                    name: details[1],
-                    dob: details[2],
-                    contact: details[3],
-                    address: details[4],
-                    vehicle_index: details[5],
-                    totalCost: document.getElementById("totalCost").value,
-                    creditcard: document.getElementById("creditCardNumber").value,
-                    expiryMonth: document.getElementById("month").value,
-                    expiryYear: document.getElementById("year").value,
-                    cvv: document.getElementById("cvv").value
-                },
-                success: function(data) {
-                    $('#paymentDialog').modal('hide');
-                    $('#successDialog').modal('show');
-                    window.setTimeout(function() {
-                        $("#successDialog").fadeTo(500, 0).slideUp(500, function(){
-                            $('#paymentDialog').modal('hide');
-                            $('#successBox').modal('show');
-                        });
-                    }, 4000);
-                }
-            });
-        }
-    }
-    function setAlert(str, htmlText) {
-        $(str).show();
-        $(str).html(htmlText);
-        $(str).css('opacity', '1');
-        window.setTimeout(function() {
-            $(str).fadeTo(500, 0).slideUp(500, function(){
-                $(this).hide();
-            });
-        }, 4000);
-    }
-    </script>
+    <?php include './includes/header.php'; ?>
+    <script type="text/javascript" src="./js/generateBill.js"></script>
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -225,7 +20,7 @@
             </li>
         </ul>
         <button type="button" class="btn btn-outline-light" onclick="window.history.back()" style="margin: 0 1em">Go back</button>
-        <button type="button" class="btn btn-outline-light" onclick="window.location.href='./logout.php'">Logout</button>
+        <button type="button" class="btn btn-outline-light" onclick="window.location.href='./includes/logout.php"'">Logout</button>
     </div>
 </nav>
 
@@ -234,7 +29,7 @@
     $index = $_GET["index"];
     echo "<input type=hidden id=vin value='$index'>";
 
-    include 'connection.php';
+    include 'includes/connection.php';
     $fmt = new NumberFormatter( 'en_IN', NumberFormatter::CURRENCY );
 
     $optionsQuery = "SELECT `option name`, `cost`, `option id` FROM `car has options` JOIN `cars` JOIN `options` WHERE `option id`=`id` AND `vehicle index`=`index number` AND `index number`=$index ORDER BY `option id`";

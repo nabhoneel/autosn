@@ -11,22 +11,24 @@ function showCars() {
         return;
         return;
     }
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("cars").innerHTML = this.responseText;
-        }
-    };
     var inputElements = document.getElementsByClassName('options');
-    var checkedValues = [document.getElementById("number of seats").value];
+    var checkedValues = [];
     for(var i=0; inputElements[i]; ++i) {
         if(inputElements[i].checked) {
             checkedValues.push(inputElements[i].value);
         }
     }
-    xmlhttp.open("POST", "ajaxLoad/generateCars.php", true);
-    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xmlhttp.send(JSON.stringify(checkedValues));
+    $.ajax({
+        url: "ajaxLoad/generateCars.php",
+        method: "POST",
+        data: {
+            number: document.getElementById("number of seats").value,
+            options: JSON.stringify(checkedValues)
+        },
+        success: function(data) {
+            $("#cars").html(data);
+        }
+    });
 }
 </script>
 
