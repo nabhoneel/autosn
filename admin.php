@@ -15,7 +15,7 @@ include 'includes/connection.php';
 </head>
 
 <?php
-$fmt = new NumberFormatter('en_IN', NumberFormatter::CURRENCY);
+include 'includes/utilities.php';
 
 $result = $mysqli->query("SELECT `company name`, SUM(`total price`) FROM `sold car` GROUP BY `company name` ORDER BY SUM(`total price`) DESC LIMIT 1");
 $top_car = $result->fetch_array(MYSQLI_NUM);
@@ -67,22 +67,22 @@ $top_sales_person = $result->fetch_array(MYSQLI_NUM);
                     <div class="dashboard-grid">
                         <div class="gross-sales">
                             <h1>Overall sale</h1>
-                            <h5><?php echo $fmt->formatCurrency($all_sales[0], "INR"); ?></h5>
+                            <h5><?php echo getRupees($all_sales[0]); ?></h5>
                         </div>
                         <div class="top-company">
                             <h4>Company with highest sales</h4>
                             <h1><?php echo $top_car[0]; ?></h1>
-                            <h5><?php echo $fmt->formatCurrency($top_car[1], "INR"); ?></h5>
+                            <h5><?php echo getRupees($top_car[1]); ?></h5>
                         </div>
                         <div class="top-model">
                             <h4>Model with highest sales</h4>
                             <h1><?php echo $top_model[0]." ".$top_model[1]; ?></h1>
-                            <h5><?php echo $fmt->formatCurrency($top_model[2], "INR"); ?></h5>
+                            <h5><?php echo getRupees($top_model[2]); ?></h5>
                         </div>
                         <div class="top-seller">
                             <h4>Top Sales Person</h4>
                             <h1><?php echo $top_sales_person[1]; ?></h1>
-                            <h5><?php echo $fmt->formatCurrency($top_sales_person[0], "INR"); ?></h5>
+                            <h5><?php echo getRupees($top_sales_person[0]); ?></h5>
                         </div>
                         <div class="company-sales"><canvas id="company-sales"></canvas></div>
                         <div class="seller-comparison"><canvas id="seller-comparison"></canvas></div>

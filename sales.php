@@ -59,8 +59,7 @@ verify();
 
     include 'includes/connection.php';
     $results = $mysqli->query("SELECT * FROM `sold car` WHERE `sold by`='".getUsername()."';");
-    $fmt = new NumberFormatter('en_IN', NumberFormatter::CURRENCY);
-
+    include 'includes/utilities.php';
     ?>
     <div class="grid">
         <div class="tables">
@@ -81,7 +80,7 @@ verify();
                         $datetime = new DateTime($row["datetime"]);
                         echo "<td>".$datetime->format('jS F\, Y')."</td>";
                         echo "<td>".$row["company name"]." ".$row["model name"]."</td>";
-                        echo "<td>".$fmt->formatCurrency($row["total price"], "INR")."</td>";
+                        echo "<td>".getRupees($row["total price"])."</td>";
                         echo "</tr>";
                         if($key==4) break;
                     }
@@ -145,9 +144,9 @@ verify();
                                 WHERE `id`=`option id` AND `vehicle index`=".$row["vehicle index"]);
                             $options = "";
                             foreach($options_result as $i)
-                                $options .= "<div title=".$fmt->formatCurrency($i["cost"], "INR")." class='optionName'>".$i["option name"]."</div>";
+                                $options .= "<div title=".getRupees($i["cost"], "INR")." class='optionName'>".$i["option name"]."</div>";
                             echo "<td>".$options."</td>";
-                            echo "<td>".$fmt->formatCurrency($row["total price"], "INR")."</td>";
+                            echo "<td>".getRupees($row["total price"])."</td>";
                             echo "<td>".$row["sold to"]."</td>";
                             echo "</tr>";
                         }

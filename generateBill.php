@@ -30,7 +30,7 @@
     echo "<input type=hidden id=vin value='$index'>";
 
     include 'includes/connection.php';
-    $fmt = new NumberFormatter( 'en_IN', NumberFormatter::CURRENCY );
+    include 'includes/utilities.php';
 
     $optionsQuery = "SELECT `option name`, `cost`, `option id` FROM `car has options` JOIN `cars` JOIN `options` WHERE `option id`=`id` AND `vehicle index`=`index number` AND `index number`=$index ORDER BY `option id`";
     $modelDetailsQuery = "SELECT * FROM `cars` NATURAL JOIN `model` WHERE `index number`=$index";
@@ -159,7 +159,7 @@
                 </thead>
                 <tr>
                     <td><b>Base Price</b></td>
-                    <td><b><?php echo $fmt->formatCurrency($modelDetails[4], "INR"); ?></b></td>
+                    <td><b><?php echo getRupees($modelDetails[4]); ?></b></td>
                 </tr>
                 <?php
                 $optionsCost = 0;
@@ -168,7 +168,7 @@
                     ?>
                     <tr>
                         <td><?php echo $i["option name"]; ?></td>
-                        <td><?php echo $fmt->formatCurrency($i["cost"], "INR"); ?></td>
+                        <td><?php echo getRupees($i["cost"]); ?></td>
                     </tr>
                     <?php
                 }
@@ -178,7 +178,7 @@
                         <th>Total</th>
                         <th style="font-family: monospace;
                         font-size: 1.4em;
-                        text-align: right;"><?php echo $fmt->formatCurrency(($modelDetails[4] + $optionsCost), "INR"); ?></th>
+                        text-align: right;"><?php echo getRupees($modelDetails[4] + $optionsCost); ?></th>
                         <input type="hidden" id="totalCost" value="<?php echo ($modelDetails[4] + $optionsCost); ?>">
                     </tr>
                 </thead>
