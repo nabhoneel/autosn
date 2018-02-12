@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 09, 2018 at 10:44 PM
+-- Generation Time: Feb 12, 2018 at 05:27 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -86,11 +86,6 @@ INSERT INTO `car has options` (`vehicle index`, `option id`) VALUES
 (14, 4),
 (14, 7),
 (14, 3),
-(15, 6),
-(15, 1),
-(15, 2),
-(15, 4),
-(15, 3),
 (16, 2),
 (16, 1),
 (16, 6),
@@ -163,12 +158,6 @@ INSERT INTO `car has options` (`vehicle index`, `option id`) VALUES
 (38, 1),
 (38, 3),
 (38, 2),
-(39, 6),
-(39, 5),
-(39, 4),
-(39, 2),
-(39, 1),
-(39, 3),
 (40, 2),
 (40, 5),
 (40, 4),
@@ -225,20 +214,6 @@ INSERT INTO `car has options` (`vehicle index`, `option id`) VALUES
 (50, 5),
 (51, 6),
 (51, 3),
-(52, 5),
-(52, 7),
-(52, 3),
-(52, 4),
-(52, 6),
-(52, 1),
-(52, 2),
-(53, 6),
-(53, 2),
-(53, 5),
-(53, 1),
-(53, 4),
-(53, 3),
-(53, 7),
 (54, 3),
 (54, 7),
 (54, 5),
@@ -280,13 +255,6 @@ INSERT INTO `car has options` (`vehicle index`, `option id`) VALUES
 (62, 7),
 (62, 5),
 (62, 1),
-(63, 3),
-(63, 6),
-(63, 5),
-(63, 1),
-(63, 2),
-(63, 4),
-(63, 7),
 (64, 1),
 (64, 2),
 (64, 6),
@@ -589,7 +557,6 @@ INSERT INTO `cars` (`index number`, `company name`, `model name`) VALUES
 (12, 'Ford', 'EcoSport'),
 (13, 'Ford', 'Endeavour'),
 (14, 'Ford', 'Endeavour'),
-(15, 'Ford', 'Endeavour'),
 (16, 'Ford', 'Endeavour'),
 (17, 'Ford', 'Endeavour'),
 (19, 'Ford', 'Figo'),
@@ -610,7 +577,6 @@ INSERT INTO `cars` (`index number`, `company name`, `model name`) VALUES
 (35, 'Honda', 'Accord'),
 (37, 'Honda', 'City'),
 (38, 'Honda', 'City'),
-(39, 'Honda', 'City'),
 (40, 'Honda', 'City'),
 (41, 'Honda', 'City'),
 (42, 'Honda', 'City'),
@@ -623,8 +589,6 @@ INSERT INTO `cars` (`index number`, `company name`, `model name`) VALUES
 (49, 'Honda', 'Jazz'),
 (50, 'Honda', 'Jazz'),
 (51, 'Honda', 'Jazz'),
-(52, 'Honda', 'Jazz'),
-(53, 'Honda', 'Jazz'),
 (54, 'Honda', 'Jazz'),
 (55, 'Honda', 'Mobilio'),
 (56, 'Honda', 'Mobilio'),
@@ -634,7 +598,6 @@ INSERT INTO `cars` (`index number`, `company name`, `model name`) VALUES
 (60, 'Honda', 'Mobilio'),
 (61, 'Hyundai', 'Creta'),
 (62, 'Hyundai', 'Creta'),
-(63, 'Hyundai', 'Creta'),
 (64, 'Hyundai', 'Creta'),
 (65, 'Hyundai', 'Creta'),
 (66, 'Hyundai', 'Creta'),
@@ -737,6 +700,7 @@ INSERT INTO `customer` (`name`, `dob`, `address`, `contact number`, `email id`) 
 ('Minakshi Mukherjee', '1997-02-04', 'JD-2, Salt Lake City, Kolkata 700013', 9850067829, 'minakshiupadhyay@yahoo.com'),
 ('Nabhoneel Majumdar', '1995-10-20', 'FD 219/8, Sector 3, Salt Lake City', 9830056192, 'nabhoneel.95@gmail.com'),
 ('Nandini Majumdar', '1968-08-02', 'FD 219/8, Sector 3, Salt Lake City', 9830563493, 'nandini.majumdar@gmail.com'),
+('Rishov Nag', '1995-08-14', 'Kankurgachi', 9823443851, 'rishov.nag@gmail.com'),
 ('Soumen Roy', '1995-02-20', 'FD 219, Salt Lake City, Kolkata 700106', 9830056167, 'soumen@the.hml'),
 ('Mayukh Mukherjee', '1995-07-07', 'Behala, Kolkata 700010', 9745120311, 'yomayukh@gmail.com');
 
@@ -758,13 +722,17 @@ CREATE TABLE `members` (
 --
 
 INSERT INTO `members` (`username`, `password`, `role`, `employer`) VALUES
+('admin', 'nm+sj@autosn.project', 'admin', NULL),
 ('forddealer', 'fordpassword', 'dealer', 'Ford'),
 ('gaabroy', 'gilaboo', 'sales', NULL),
 ('hondadealer', 'hondapassword', 'dealer', 'Honda'),
 ('hyundaidealer', 'hyundaipassword', 'dealer', 'Hyundai'),
+('jhinku', 'castraboo', 'sales', NULL),
 ('marutidealer', 'marutipassword', 'dealer', 'Maruti Suzuki'),
 ('nabhoneelm', '123', 'sales', NULL),
 ('noobie', 'gilaboo', 'sales', NULL),
+('pokitee', 'abcd', 'sales', NULL),
+('prakriti', 'gilaboo', 'sales', NULL),
 ('suchandraj', 'abc', 'sales', NULL);
 
 -- --------------------------------------------------------
@@ -863,7 +831,12 @@ INSERT INTO `sold car` (`id`, `datetime`, `vehicle index`, `company name`, `mode
 (8, '2018-01-09 21:36:40', 18, 'Ford', 'Endeavour', 'nabhoneelm', 'jhinku@gmail.com', 2679100, '4389 5709 8435 9023', '3', 2018, 676),
 (9, '2018-03-07 20:43:10', 113, 'Maruti Suzuki', 'Ertiga', 'nabhoneelm', 'nabhoneel.95@gmail.com', 875100, '5943 5934 9859 0238', '1', 2018, 234),
 (10, '2018-04-10 21:33:22', 20, 'Ford', 'Figo', 'nabhoneelm', 'nandini.majumdar@gmail.com', 649100, '2323 8473 8789 3275', '6', 2018, 283),
-(11, '2018-02-09 21:42:58', 36, 'Honda', 'Accord', 'nabhoneelm', 'nandini.majumdar@gmail.com', 3744000, '2837 4892 3797 9579', '4', 2018, 534);
+(11, '2018-02-09 21:42:58', 36, 'Honda', 'Accord', 'nabhoneelm', 'nandini.majumdar@gmail.com', 3744000, '2837 4892 3797 9579', '4', 2018, 534),
+(12, '2018-02-11 06:27:36', 63, 'Hyundai', 'Creta', 'nabhoneelm', 'nabhoneel.95@gmail.com', 1265100, '2394 8792 3532 4853', '4', 2018, 345),
+(13, '2018-01-08 07:13:31', 52, 'Honda', 'Jazz', 'noobie', 'jhasuchandra@gmail.com', 947100, '2443 2532 4534 2534', '5', 2018, 234),
+(14, '2018-02-11 07:15:15', 53, 'Honda', 'Jazz', 'noobie', 'rishov.nag@gmail.com', 947100, '2903 7493 2490 2349', '5', 2018, 452),
+(15, '2018-02-11 07:36:27', 39, 'Honda', 'City', 'noobie', 'rishov.nag@gmail.com', 1045100, '3985 9347 5983 4589', '4', 2018, 546),
+(16, '2018-03-20 08:08:09', 15, 'Ford', 'Endeavour', 'noobie', 'rishov.nag@gmail.com', 2649100, '3453 4624 3623 6234', '4', 2018, 345);
 
 -- --------------------------------------------------------
 
@@ -919,7 +892,39 @@ INSERT INTO `sold car has options` (`vehicle index`, `option id`) VALUES
 (36, 4),
 (36, 7),
 (36, 2),
-(36, 1);
+(36, 1),
+(63, 3),
+(63, 6),
+(63, 5),
+(63, 1),
+(63, 2),
+(63, 4),
+(63, 7),
+(52, 5),
+(52, 7),
+(52, 3),
+(52, 4),
+(52, 6),
+(52, 1),
+(52, 2),
+(53, 6),
+(53, 2),
+(53, 5),
+(53, 1),
+(53, 4),
+(53, 3),
+(53, 7),
+(39, 6),
+(39, 5),
+(39, 4),
+(39, 2),
+(39, 1),
+(39, 3),
+(15, 6),
+(15, 1),
+(15, 2),
+(15, 4),
+(15, 3);
 
 --
 -- Indexes for dumped tables
@@ -1004,7 +1009,7 @@ ALTER TABLE `options`
 -- AUTO_INCREMENT for table `sold car`
 --
 ALTER TABLE `sold car`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- Constraints for dumped tables
 --

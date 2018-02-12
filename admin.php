@@ -57,6 +57,7 @@ $top_sales_person = $result->fetch_array(MYSQLI_NUM);
                     <ul class="navbar-nav mr-auto" style="margin-left: auto; margin-right:0 !important;">
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addSalesPerson">Add Sales Person</button>
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#salesPeople" style="margin: 0 1em">Sales People</button>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#carDealer" style="margin: 0 1em 0 0">Car Dealers</button>
                         <button type="button" class="btn btn-info" onclick="window.location.href='./includes/logout.php'" style="padding: 0 0.5em 0 1em; border-radius: 3em;">Logout <i class="fa fa-sign-out"></i></button>
                     </ul>
                 </div>
@@ -118,6 +119,82 @@ $top_sales_person = $result->fetch_array(MYSQLI_NUM);
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-info" onclick="addSalesPerson()">Add</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="salesPeople">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Current list of sales people</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-sm" style="text-align: center;">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Username</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $sales_people = $mysqli->query("SELECT `username` FROM `members` WHERE `role`='sales'");
+                            foreach($sales_people as $key=>$username) {
+                                ?>
+                                <tr>
+                                    <th scope="row"><?php echo ($key+1); ?></th>
+                                    <td><?php echo $username["username"]; ?></td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="carDealer">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Current list of dealers</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <table class="table" style="text-align: center;">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Company</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $sales_people = $mysqli->query("SELECT `username`, `employer` FROM `members` WHERE `role`='dealer'");
+                            foreach($sales_people as $key=>$username) {
+                                ?>
+                                <tr>
+                                    <th scope="row"><?php echo ($key+1); ?></th>
+                                    <td><?php echo $username["username"]; ?></td>
+                                    <td><?php echo $username["employer"]; ?></td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
