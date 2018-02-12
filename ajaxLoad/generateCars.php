@@ -6,7 +6,7 @@ $ticked_options = json_decode(htmlspecialchars_decode($_POST["options"]));
 
 $results = $mysqli->query("SELECT `cars`.`index number`, `cars`.`company name`, `cars`.`model name`, `model`.`number of seats`, `model`.`cost` FROM `cars` NATURAL JOIN `model` WHERE `model`.`number of seats` >= ".$_POST["number"]);
 
-$fmt = new NumberFormatter('en_IN', NumberFormatter::CURRENCY);
+include '../includes/utilities.php';
 
 $count = 1;
 $currentSet = "";
@@ -58,7 +58,7 @@ $first_row = 1;
                         <?php
                     }
                     echo "<td>".$counter++."<td>".$row["company name"]."</td><td>".$row["model name"]."</td>";
-                    echo "<td>".$fmt->formatCurrency($row["cost"], "INR")."</td><td>".$row["number of seats"]."</td>";
+                    echo "<td>".getRupees($row["cost"])."</td><td>".$row["number of seats"]."</td>";
                     ?>
                     <td>
                         <!--Expand button:-->
@@ -88,7 +88,7 @@ $first_row = 1;
                                                 </label>
                                             </td>
                                             <td><?php echo $optionName; ?></td>
-                                            <td><?php echo $fmt->formatCurrency(array_sum($cost), "INR"); ?></td>
+                                            <td><?php echo getRupees(array_sum($cost)); ?></td>
                                         </tr>
 
                                         <?php

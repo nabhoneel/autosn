@@ -67,7 +67,7 @@ function saveOld() {
     details.push(document.getElementById("oldcontact").value);
     details.push(document.getElementById("olddob").value);
 
-    xmlhttp.open("POST", "save.php", true);
+    xmlhttp.open("POST", "ajaxLoad/save.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.send(JSON.stringify(details));
 }
