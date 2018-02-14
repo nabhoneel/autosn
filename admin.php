@@ -89,8 +89,42 @@ $top_sales_person = $result->fetch_array(MYSQLI_NUM);
                         <div class="all-sales-graph"><canvas id="all-sales-comparison"></canvas></div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="v-pills-0" role="tabpanel" aria-labelledby="v-pills-Assists-tab"><div style="background-color: black;"></div></div>
-                <div class="tab-pane fade" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-Customers-tab">...</div>
+                <div class="tab-pane fade" id="v-pills-0" role="tabpanel" aria-labelledby="v-pills-Assists-tab">
+                    <div class="assist-grid">
+                              <select name="sales-people" class="custom-select sales-people" placeholder="Sales People's List">
+                                <?php
+                                $sales_people = $mysqli->query("SELECT `username` FROM `members` WHERE `role`='sales';");
+                                foreach($sales_people as $i) {
+                                    ?>
+                                    <option value="<?php echo $i["username"]; ?>"><?php echo $i["username"]; ?></option>
+                                    <?php
+                                }
+                                ?>
+                              </select>
+                              <script type="text/javascript" src="js/dropdown.js"></script>
+                              <div class="sales-details">
+                                  <input type="hidden" id="chosenYear" value="<?php echo date("Y"); ?>">
+                                  <div id="assists-cards"></div>
+                                  <canvas id="salesComparison" width=740></canvas>
+                                  <div id="sales-data"></div>
+                              </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-Customers-tab">
+                    <div class="list-of-customers">
+                        <script type="text/javascript" src="js/customer_list.js"></script>
+                        <input type="text" class="search-customers" id="search-customers" oninput="showSuggestions()" placeholder="search customers (by emails)">
+                        <ul id="list-of-customers" style="padding-left: 0px;">
+                            <?php
+                            $customers = $mysqli->query("SELECT * FROM `customer`");
+                            foreach($customers as $x) {
+                                echo "<li class='customer-list-set' id='".$x["email id"]."'>".$x["email id"]."</li>";
+                            }
+                            ?>
+                        </ul>
+                    </div>
+                    <div class="customer-details" id="customer-details"></div>
+                </div>
                 <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-Cars-tab">...</div>
             </div>
         </div>
@@ -142,8 +176,8 @@ $top_sales_person = $result->fetch_array(MYSQLI_NUM);
                         </thead>
                         <tbody>
                             <?php
-                            $sales_people = $mysqli->query("SELECT `username` FROM `members` WHERE `role`='sales'");
-                            foreach($sales_people as $key=>$username) {
+                            $dealers = $mysqli->query("SELECT `username` FROM `members` WHERE `role`='sales'");
+                            foreach($dealers as $key=>$username) {
                                 ?>
                                 <tr>
                                     <th scope="row"><?php echo ($key+1); ?></th>

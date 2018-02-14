@@ -62,7 +62,7 @@
 
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="oldcust" role="tabpanel" aria-labelledby="home-tab">
-                    <input size="35" type="text" class="form-control" id="emailid" aria-describedby="emailHelp" placeholder="Enter email" onkeyup="showResult(this.value)">
+                    <input size="35" type="text" class="form-control" id="emailid" aria-describedby="emailHelp" placeholder="Enter email" oninput="showResult(this.value)">
                     <div id="showids"></div>
                     <br>
                     <center>

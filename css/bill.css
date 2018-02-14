@@ -38,3 +38,11 @@ td:nth-child(even) {
 th:nth-child(even) {
     text-align: right;
 }
+
+.suggestions {
+    padding: 0.5em 0.5em;
+}
+
+.suggestions:hover {
+    background-color: #f3f3f3;
+}

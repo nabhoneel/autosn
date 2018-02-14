@@ -13,13 +13,16 @@ function showResult(str) {
         },
         success: function(data) {
             $("#showids").html(data);
-            $("#showids").css("border", "1px solid #A5ACB2");
+            $("#showids").css("border", "1px dotted #A5ACB2");
             $("#detailsbutton").prop("disabled", false);
         }
     });
 }
 function writeToTextArea(str) {
-    if(str.length > 0) $("#emailid").val(str);
+    if(str.length > 0) {
+        $("#emailid").val(str);
+        getDetails();
+    }
     $("#showids").html("");
     $("#showids").css("border", "0px");
 }

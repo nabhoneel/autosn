@@ -1,10 +1,14 @@
 @import "master.css";
 
-.grid {
+.grid, #v-pills-1 {
     display: grid;
     grid-template-columns: 15% 85%;
     height: 100vh;
-    background-color: white;
+}
+
+#v-pills-1 {
+    grid-template-columns: 30% 70%;
+    grid-column-gap: 1em;
 }
 
 .logo, img {
@@ -28,6 +32,8 @@
 }
 
 .content-area {
+    overflow: auto !important;
+    background-color: #f3f3f3;
     padding: 0 2em !important;
 }
 
@@ -49,7 +55,31 @@
     font-weight: 400;
 }
 
-.item1, .item2 {
+.list-of-customers {
+
+}
+
+input.search-customers {
+    margin: 0;
+    border: none;
+    overflow: visible;
+    padding: 1em;
+    width: -webkit-fill-available;
+    text-align: center;
+}
+
+#list-of-customers {
+    margin-top: 1em;
+    overflow-y: scroll;
+    margin-bottom: 1rem;
+}
+
+#list-of-customers > li {
+    padding: 0.5em 0 0.5em 1.5em;
+    list-style-type: none;
+}
+
+.customer-details {
 
 }
 
@@ -126,4 +156,26 @@ a.nav-link {
     background-color: #ffc107 !important;
     font-size: 0.9em !important;
     font-weight: 500 !important;
+}
+
+.custom-select {
+    width: auto !important;
+}
+
+
+.optionName:hover {
+    background-color: #c5c5c5;
+    cursor: default;
+}
+
+.optionName {
+    background-color: #ececec;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid #c3c3c3;
+    vertical-align: middle;
+    padding: 3px 10px;
+    margin: 4px 0;
+    width: max-content;
+    white-space: nowrap;
 }
