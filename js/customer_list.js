@@ -15,7 +15,7 @@ $(document).ready(function() {
 
 function showDetails(str) {
     $.ajax({
-        url: 'ajaxLoad/showDetails.php',
+        url: 'ajaxLoad/showCustomerDetails.php',
         method: 'POST',
         data: {
             email: str
@@ -32,7 +32,7 @@ function showDetails(str) {
 function showSuggestions() {
     var x = $("#search-customers").val();
     if(x == "") {
-        $(".customer-list-set").each(function(){            
+        $(".customer-list-set").each(function(){
             $(this).attr('hidden', false);
         });
     }

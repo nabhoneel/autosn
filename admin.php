@@ -35,15 +35,10 @@ $top_sales_person = $result->fetch_array(MYSQLI_NUM);
         <div class="sidebar">
             <span class="logo"><h2>Automobile Company</h2></span>
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="nav-link active" id="v-pills-dashboard-tab" data-toggle="pill" href="#v-pills-dashboard" role="tab" aria-controls="v-pills-dashboard" aria-selected="true"><i class="fa fa-dashboard"></i> Dashboard</a>
-                <?php
-                $tabs = array("<i class='fa fa-users'></i> Assists", "<i class='fa fa-user'></i> Customers", "<i class='fa fa-car'></i> Cars");
-                foreach($tabs as $key=>$x) {
-                    ?>
-                    <a class="nav-link" id="v-pills-<?php echo $key; ?>-tab" data-toggle="pill" href="#v-pills-<?php echo $key; ?>" role="tab" aria-controls="v-pills-<?php echo $key; ?>" aria-selected="false"><?php echo $x; ?></a>
-                    <?php
-                }
-                ?>
+                <a class="nav-link active" id="dashboard-tab" data-toggle="pill" href="#dashboard" role="tab"><i class="fa fa-dashboard"></i> Dashboard</a>
+                <a class="nav-link" id="assists-tab" data-toggle="pill" href="#assists" role="tab"><i class='fa fa-users'></i> Assists</a>
+                <a class="nav-link" id="customers-tab" data-toggle="pill" href="#customers" role="tab"><i class='fa fa-user'></i> Customers</a>
+                <a class="nav-link" id="cars-tab" data-toggle="pill" href="#cars" role="tab"><i class='fa fa-car'></i> Cars</a>
             </div>
         </div>
         <div class="content-area">
@@ -63,7 +58,7 @@ $top_sales_person = $result->fetch_array(MYSQLI_NUM);
                 </div>
             </nav>
             <div class="tab-content" id="v-pills-tabContent">
-                <div class="tab-pane fade show active" id="v-pills-dashboard" role="tabpanel" aria-labelledby="v-pills-dashboard-tab">
+                <div class="tab-pane fade show active" id="dashboard" role="tabpanel">
                     <div class="dashboard-grid">
                         <div class="gross-sales">
                             <h1>Overall sale</h1>
@@ -89,43 +84,75 @@ $top_sales_person = $result->fetch_array(MYSQLI_NUM);
                         <div class="all-sales-graph"><canvas id="all-sales-comparison"></canvas></div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="v-pills-0" role="tabpanel" aria-labelledby="v-pills-Assists-tab">
+                <div class="tab-pane fade" id="assists" role="tabpanel">
                     <div class="assist-grid">
-                              <select name="sales-people" class="custom-select sales-people" placeholder="Sales People's List">
+                        <select name="sales-people" class="custom-select sales-people" placeholder="Sales People's List">
+                            <?php
+                            $sales_people = $mysqli->query("SELECT `username` FROM `members` WHERE `role`='sales';");
+                            foreach($sales_people as $i) {
+                                ?>
+                                <option value="<?php echo $i["username"]; ?>"><?php echo $i["username"]; ?></option>
                                 <?php
-                                $sales_people = $mysqli->query("SELECT `username` FROM `members` WHERE `role`='sales';");
-                                foreach($sales_people as $i) {
+                            }
+                            ?>
+                        </select>
+                        <script type="text/javascript" src="js/dropdown.js"></script>
+                        <div class="sales-details">
+                            <input type="hidden" id="chosenYear" value="<?php echo date("Y"); ?>">
+                            <div id="assists-cards"></div>
+                            <canvas id="salesComparison" width=740></canvas>
+                            <div id="sales-data"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="customers" role="tabpanel">
+                    <div class="customers-grid">
+                        <div class="list-of-customers">
+                            <script type="text/javascript" src="js/customer_list.js"></script>
+                            <input type="text" class="search-customers" id="search-customers" oninput="showSuggestions()" placeholder="search customers (by emails)">
+                            <ul id="list-of-customers" style="padding-left: 0px;">
+                                <?php
+                                $customers = $mysqli->query("SELECT * FROM `customer`");
+                                foreach($customers as $x) {
+                                    echo "<li class='customer-list-set' id='".$x["email id"]."'>".$x["email id"]."</li>";
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                        <div class="customer-details" id="customer-details"></div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="cars" role="tabpanel" aria-labelledby="v-pills-Cars-tab">
+                    <div class="cars-grid">
+                        <div class="list-of-cars">
+                            <script type="text/javascript" src="js/car_list.js"></script>
+                            <select name="car-companies" class="custom-select car-companies" placeholder="Car companies" id="carCompanies">
+                                <option value="all">All models</option>
+                                <?php
+                                $car_companies = $mysqli->query("SELECT `name` FROM `company`;");
+                                foreach($car_companies as $key=>$i) {
                                     ?>
-                                    <option value="<?php echo $i["username"]; ?>"><?php echo $i["username"]; ?></option>
+                                    <option value="<?php echo $key; ?>"><?php echo $i["name"]; ?></option>
                                     <?php
                                 }
                                 ?>
-                              </select>
-                              <script type="text/javascript" src="js/dropdown.js"></script>
-                              <div class="sales-details">
-                                  <input type="hidden" id="chosenYear" value="<?php echo date("Y"); ?>">
-                                  <div id="assists-cards"></div>
-                                  <canvas id="salesComparison" width=740></canvas>
-                                  <div id="sales-data"></div>
-                              </div>
+                            </select>
+                            <ul id="list-of-models" style="padding-left: 0px;">
+                                <?php
+                                $models = $mysqli->query("SELECT * FROM `model`");
+                                $count = -1;
+                                $old_company = "";
+                                foreach($models as $x) {
+                                    if($x["company name"] != $old_company) $count++;
+                                    echo "<li class='model-list ".$count." list-of-models' id='".$x["company name"]."' onclick='showCarDetails(\"".$x["company name"]." ".$x["model name"]."\")'>".$x["company name"]." ".$x["model name"]."</li>";
+                                    $old_company = $x["company name"];
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                        <div class="car-list" id="car-list"></div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-Customers-tab">
-                    <div class="list-of-customers">
-                        <script type="text/javascript" src="js/customer_list.js"></script>
-                        <input type="text" class="search-customers" id="search-customers" oninput="showSuggestions()" placeholder="search customers (by emails)">
-                        <ul id="list-of-customers" style="padding-left: 0px;">
-                            <?php
-                            $customers = $mysqli->query("SELECT * FROM `customer`");
-                            foreach($customers as $x) {
-                                echo "<li class='customer-list-set' id='".$x["email id"]."'>".$x["email id"]."</li>";
-                            }
-                            ?>
-                        </ul>
-                    </div>
-                    <div class="customer-details" id="customer-details"></div>
-                </div>
-                <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-Cars-tab">...</div>
             </div>
         </div>
     </div>

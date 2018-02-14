@@ -1,12 +1,12 @@
 @import "master.css";
 
-.grid, #v-pills-1 {
+.grid, .customers-grid, .cars-grid{
     display: grid;
     grid-template-columns: 15% 85%;
     height: 100vh;
 }
 
-#v-pills-1 {
+.customers-grid, .cars-grid {
     grid-template-columns: 30% 70%;
     grid-column-gap: 1em;
 }
@@ -68,19 +68,26 @@ input.search-customers {
     text-align: center;
 }
 
-#list-of-customers {
+#list-of-customers, #list-of-models {
     margin-top: 1em;
-    overflow-y: scroll;
+    overflow: auto;
     margin-bottom: 1rem;
+    height: 85vh;
 }
 
-#list-of-customers > li {
+#list-of-customers > li, #list-of-models > li {
     padding: 0.5em 0 0.5em 1.5em;
     list-style-type: none;
 }
 
-.customer-details {
+#list-of-customers > li:hover, #list-of-models > li:hover {
+    background-color: #e0e0e0;
+    cursor: pointer;
+}
 
+div#car-list {
+    margin: 1em;
+    overflow: scroll;
 }
 
 .top-company, .top-model, .gross-sales, .top-seller {
