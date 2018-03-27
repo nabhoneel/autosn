@@ -36,6 +36,13 @@ verify();
     }
     </script>
 </head>
+
+<?php
+include 'includes/connection.php';
+$results = $mysqli->query("SELECT * FROM `sold car` WHERE `sold by`='".getUsername()."';");
+include 'includes/utilities.php';
+?>
+
 <nav class="navbar navbar-expand-lg" style="background: #134756;">
     <a class="navbar-brand" style="color: white;">Hello, <?php echo getUsername(); ?></a>
     <input type="hidden" value="<?php echo getUsername(); ?>" id="username_hidden">
@@ -46,7 +53,14 @@ verify();
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <h5><span class="badge badge-primary" style="margin-top: 9px;">Rank #10</span></h5>
+                <h5><span class="badge badge-info" style="padding: 1em; margin: -1em auto; margin-top: -5px;">
+                  Rank #<?php
+                  $rank_results = $mysqli->query("SELECT `sold by`, SUM(`sold car`.`total price`) FROM `sold car` GROUP BY `sold by` ORDER BY SUM(`total price`) DESC");
+                  foreach ($rank_results as $key => $value) {
+                    if($value["sold by"] == getUsername()) echo $key+1;
+                  }
+                  ?>
+                </span></h5>
             </li>
         </ul>
         <button type="button" class="btn btn-outline-light"  data-toggle="modal" data-target="#assistModal" style="margin: 0 1em">Assist Customer</button>
@@ -55,13 +69,6 @@ verify();
 </nav>
 
 <body>
-
-    <?php
-
-    include 'includes/connection.php';
-    $results = $mysqli->query("SELECT * FROM `sold car` WHERE `sold by`='".getUsername()."';");
-    include 'includes/utilities.php';
-    ?>
     <div class="grid">
         <div class="tables">
             <table class="table">
